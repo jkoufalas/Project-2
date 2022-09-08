@@ -1,0 +1,28 @@
+<!-- Loop over each object in the projects array -->
+<div class="row mb-4 project">
+  <div class="col-md-5">
+    <h1>
+      Category:
+      {{thread.category.category_name}}
+    </h1>
+    <h2>
+      Thread:
+      {{thread.id}}
+      {{thread.thread_name}}
+    </h2>
+    <p>User created thread:
+      {{thread.user.name}}
+    </p>
+    <p>
+      <h3>Posts:
+        {{#each thread.posts as |post|}}
+          <p>
+            {{post.post}}
+            {{post.user.name}}
+            {{post.date_created}}
+          </p>
+        {{/each}}
+      </h3>
+    </p>
+  </div>
+</div>

@@ -10,7 +10,7 @@ const {
 } = require("../models");
 const withAuth = require("../utils/auth");
 
-router.get("/", async (req, res) => {
+/* router.get("/", async (req, res) => {
   try {
     // Get all projects and JOIN with user data
     const threadData = await Thread.findAll({
@@ -66,6 +66,6 @@ router.get("/", async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
-});
+}); */
 
 module.exports = router;

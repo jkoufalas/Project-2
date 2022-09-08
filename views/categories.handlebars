@@ -1,0 +1,12 @@
+<!-- Loop over each object in the projects array -->
+{{#each categories as |category|}}
+  <div class="row mb-4 project">
+    <div class="col-md-5">
+      <h1>
+        Category:
+        {{category.category_name}}
+        {{!-- {{category.id}} --}}
+      </h1>
+    </div>
+  </div>
+{{/each}}
