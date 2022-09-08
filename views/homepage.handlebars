@@ -1,0 +1,55 @@
+<!-- Loop over each object in the projects array -->
+{{#each threads as |thread|}}
+  <div class="row mb-4 project">
+    <div class="col-md-5">
+      <h1>
+        Category:
+        {{thread.category.category_name}}
+      </h1>
+      <h2>
+        Thread:
+        {{thread.id}}
+        {{thread.thread_name}}
+      </h2>
+      <p>User created thread:
+        {{thread.user.name}}
+      </p>
+      <p>Posts:
+        {{#each thread.posts as |post|}}
+          <p>
+            {{post.post}}
+            {{post.user.name}}
+          </p>
+        {{/each}}
+      </p>
+    </div>
+  </div>
+{{/each}}
+
+<!-- Loop over each object in the projects array -->
+{{#each groups as |group|}}
+  <div class="row mb-4 project">
+    <div class="col-md-5">
+      <h1>
+        Group:
+        {{group.id}}
+        {{group.group_name}}
+      </h1>
+      <h3>
+        Users in group:
+        {{#each group.group_members as |user|}}
+          <p>
+            {{user.name}}
+          </p>
+        {{/each}}
+      </h3>
+      <p>Message:
+        {{#each group.messages as |message|}}
+          <p>
+            {{message.message}}
+          </p>
+        {{/each}}
+      </p>
+    </div>
+  </div>
+{{/each}}
