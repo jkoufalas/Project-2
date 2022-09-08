@@ -4,14 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="./style.css">
   <title>Title</title>
 </head>
 <body>
-  <header>
+  <header class="inline-flex justify-between w-full h-32 bg-slate-500 border-b-4 border-double border-slate-300 text-zinc-300">
     <!-- <h1>Title</h1> -->
-    <nav>
-        <ul>
+    <nav class="self-center animate-bounce">
+        <ul class="inline-flex justify-around w-96">
             <li><a href="#">Home</a></li>
             <li><a href="#">Dashboard</a></li>
             <li><a href="#">Categories</a></li>
@@ -23,23 +24,23 @@
     </div>
   </header>
   <main>
-    <div class="left-column">
+    <div class="p-5 w-1/5 h-screen bg-slate-500 border-r-4 border-double border-slate-300 text-zinc-300">
         <h3>Groups</h3>
-        <ul>
+        <ul class="pl-1">
             <li>Group 1</li>
             <li>Group 2</li>
             <li>Group 3</li>
         </ul>
         <h3>Threads</h3>
-        <ul>
+        <ul class="pl-1">
             <li>Thread 1</li>
             <li>Thread 2</li>
             <li>Thread 3</li>
         </ul>
     </div>
     <div class="main-content">
-        <div class="thread-card">
-            <div class="card-main">
+        <div class="inline-flex justify-between rounded-2xl m-2.5 border border-double border-slate-300">
+            <div class="m-t-2.5 mr-0">
                 <h3>Last 5 Posts</h3>
                 <h4>Post Title</h4>
                 <p>Post description</p>
@@ -54,8 +55,8 @@
             </div>
             <!-- <div class="sub"><a href="#">Unsubscribe</a></div> -->
         </div>
-        <div class="thread-card">
-            <div class="card-main">
+        <div class="inline-flex justify-between rounded-2xl m-2.5 border border-double border-slate-300">
+            <div class="m-t-2.5 mr-0">
                 <h3>Last 5 Chats</h3>
                 <h4>User</h4>
                 <p>Message preview</p>

@@ -1,0 +1,27 @@
+[
+  {
+    "thread_name": "jQuery",
+    "category_id": "1",
+    "user_id": "2"
+  },
+  {
+    "thread_name": "Middleware issues",
+    "category_id": "2",
+    "user_id": "1"
+  },
+  {
+    "thread_name": "Using form data",
+    "category_id": "4",
+    "user_id": "1"
+  },
+  {
+    "thread_name": "script.js",
+    "category_id": "1",
+    "user_id": "4"
+  },
+  {
+    "thread_name": "Sequelize Connections",
+    "category_id": "5",
+    "user_id": "3"
+  }
+]
