@@ -74,7 +74,18 @@ router.get('/categories', async (req, res) => {
     const categories = categoryData.map((category) => category.get({ plain: true }));
 
     res.render('categories', {
-      categories
+      categories,
+      logged_in: req.session.logged_in
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/new-category', async (req, res) => {
+  try {
+    res.render('new-category', {
+      logged_in: req.session.logged_in
     });
   } catch (err) {
     res.status(500).json(err);
@@ -99,6 +110,7 @@ router.get('/threads/:id', async (req, res) => {
 
     res.render("threads", {
       threads,
+      logged_in: req.session.logged_in
     });
   } catch (err) {
     res.status(500).json(err);
