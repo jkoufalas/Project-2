@@ -1,0 +1,17 @@
+<!-- Loop over each object in the projects array -->
+{{#each threads as |thread|}}
+  <div class="row mb-4 project">
+    <div class="col-md-5">
+        Thread:
+        {{thread.id}}
+        {{thread.thread_name}}
+        {{thread.date_created}}
+
+      </h2>
+      <p>User created thread:
+        {{thread.user.name}}
+        {{thread.user.email}}
+      </p>
+    </div>
+  </div>
+{{/each}}
