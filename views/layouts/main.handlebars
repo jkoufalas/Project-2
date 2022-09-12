@@ -4,28 +4,35 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Test Page</title>
-    {{!-- <link rel="stylesheet" href="/css/jass.css" /> --}}
-    {{!-- <link rel="stylesheet" href="/css/style.css" /> --}}
+    <script src="https://cdn.tailwindcss.com"></script>
+    {{! <link rel="stylesheet" href="/css/jass.css" /> }}
+    {{! <link rel="stylesheet" href="/css/style.css" /> }}
   </head>
 
   <body>
     <div class="flex-column justify-space-around">
-      <header class="display-flex justify-space-between align-center p-2">
-        <nav>
+      <header
+        class="inline-flex justify-between w-full h-32 bg-slate-500 border-b-4 border-double border-slate-300 text-zinc-300"
+      >
+        <nav class="self-center">
           <!-- Conditionally render login or logout links -->
           <a href="/">Home</a>
           <a href="/categories">Categories</a>
           {{#if logged_in}}
-          <a href="/groups">Groups</a>
-          <a href="/profile">Profile</a>
-          |
-          <button class="no-button" id="logout">Logout</button>
+            <a href="/groups">Groups</a>
+            <a href="/profile">Profile</a>
+            <button class="no-button" id="logout">Logout</button>
           {{else}}
-            <a href="/login"><button class="no-button" id="logout">Login</button></a>
+            <a href="/login"><button
+                class="no-button"
+                id="logout"
+              >Login</button></a>
           {{/if}}
         </nav>
       </header>
-      <main class="container container-fluid mt-5">
+      <main
+        class="flex items-center justify-center container container-fluid m-6 p-8"
+      >
         <!-- Render the sub layout -->
         {{{body}}}
       </main>

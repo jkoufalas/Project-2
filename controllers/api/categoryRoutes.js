@@ -1,32 +1,14 @@
 const router = require("express").Router();
-const { Thread, User, Category, Post } = require("../../models");
-// const withAuth = require("../../utils/auth");
+const { Category } = require("../../models");
+const withAuth = require("../../utils/auth");
 
-router.get("/", async (req, res) => {
-  try {
-    // Get all projects and JOIN with user data
-    const categoryData = await Category.findAll({});
-
-    const categories = categoryData.map((categorie) =>
-      categorie.get({ plain: true })
-    );
-
-    // Pass serialized data and session flag into template
-    res.render("categories", {
-      categories,
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-router.post('/', async (req, res) => {
+router.post("/", withAuth, async (req, res) => {
   try {
     const newCategory = await Category.create(req.body);
-    res.status(200).json(newCategory)
+    res.status(200).json(newCategory);
   } catch (err) {
-    res.status(400).json(err)
-  };
+    res.status(400).json(err);
+  }
 });
 
 module.exports = router;

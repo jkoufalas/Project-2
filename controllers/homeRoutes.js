@@ -33,7 +33,6 @@ router.get("/", async (req, res) => {
     });
 
     const threads = threadData.map((thread) => thread.get({ plain: true }));
-    console.log(threads);
 
     const groupData = await Group.findAll({
       include: [
@@ -55,45 +54,55 @@ router.get("/", async (req, res) => {
 
     // Serialize data so the template can read it
     const groups = groupData.map((group) => group.get({ plain: true }));
-    console.log(groups);
 
     // Pass serialized data and session flag into template
     res.render("homepage", {
-      threads,
+      //threads,
       logged_in: req.session.logged_in,
-      groups,
+      //groups,
     });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-router.get('/categories', async (req, res) => {
+router.get("/categories", async (req, res) => {
   try {
-    const categoryData = await Category.findAll({});
-    const categories = categoryData.map((category) => category.get({ plain: true }));
+    // Get all projects and JOIN with user data
+    const categoryData = await Category.findAll({
+      include: [
+        {
+          model: User,
+        },
+      ],
+    });
 
-    res.render('categories', {
+    const categories = categoryData.map((categorie) =>
+      categorie.get({ plain: true })
+    );
+
+    // Pass serialized data and session flag into template
+    res.render("categories", {
       categories,
-      logged_in: req.session.logged_in
     });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-router.get('/new-category', async (req, res) => {
+router.get("/new-category", async (req, res) => {
   try {
-    res.render('new-category', {
-      logged_in: req.session.logged_in
+    res.render("new-category", {
+      logged_in: req.session.logged_in,
     });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-router.get('/threads/:id', async (req, res) => {
+router.get("/threads/:id", async (req, res) => {
   try {
+    // Get all projects and JOIN with user data
     const threadData = await Thread.findAll({
       include: [
         {
@@ -110,14 +119,15 @@ router.get('/threads/:id', async (req, res) => {
 
     res.render("threads", {
       threads,
-      logged_in: req.session.logged_in
     });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-router.get('/thread/:id', async (req, res) => {
+router.get("/thread/:id", async (req, res) => {
+  // find one category by its `id` value
+  // be sure to include its associated Products
   try {
     const threadData = await Thread.findByPk(req.params.id, {
       include: [
@@ -140,22 +150,24 @@ router.get('/thread/:id', async (req, res) => {
 
     const thread = threadData.get({ plain: true });
 
+    console.log(thread);
+
     res.render("thread", {
       thread,
     });
   } catch (err) {
     res.status(500).json(err);
   }
-})
+});
 
-router.get('/login', (req, res) => {
+router.get("/login", (req, res) => {
   // If a session exists, redirect the request to the homepage
   if (req.session.logged_in) {
-    res.redirect('/');
+    res.redirect("/");
     return;
   }
 
-  res.render('login');
+  res.render("login");
 });
 
 module.exports = router;
