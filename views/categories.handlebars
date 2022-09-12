@@ -1,7 +1,27 @@
-<!-- Loop over each object in the projects array -->
-{{#each categories as |category|}}
-  <div class="row mb-4 project">
-    <div class="col-md-5">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Categories</title>
+</head>
+<body>
+    {{#each categories as |category|}}
+    <div class="inline-flex justify-between rounded-2xl m-2.5 border border-double border-slate-300">
+      <div class="m-t-2.5 mr-0">
+        <h1>
+          Category:
+          <a href="/threads/{{category.id}}">{{category.category_name}}</a>
+          {{!-- {{category.id}} --}}
+        </h1>
+      </div>
+    </div>
+  {{/each}}
+
+  {{#each categories as |category|}}
+  <div class="inline-flex justify-between rounded-2xl m-2.5 border border-double border-slate-300">
+    <div class="m-t-2.5 mr-0">
       <h1>
         Category:
         <a href="/threads/{{category.id}}">{{category.category_name}}</a>
@@ -11,8 +31,22 @@
   </div>
 {{/each}}
 
-{{#if logged_in}}
-<div class="row mb-4 project">
+{{#each categories as |category|}}
+  <div class="inline-flex justify-between rounded-2xl m-2.5 border border-double border-slate-300">
+    <div class="m-t-2.5 mr-0">
+      <h1>
+        Category:
+        <a href="/threads/{{category.id}}">{{category.category_name}}</a>
+        {{!-- {{category.id}} --}}
+      </h1>
+    </div>
+  </div>
+{{/each}}
+
+    {{#if logged_in}}
+<div class="inline-flex justify-between rounded-2xl m-2.5 border border-double border-slate-300">
   <a href="/new-category">Add category</button>
 </div>
 {{/if}}
+</body>
+</html>
