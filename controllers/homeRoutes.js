@@ -10,7 +10,7 @@ const {
 } = require("../models");
 const withAuth = require("../utils/auth");
 
-/* router.get("/", async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     // Get all projects and JOIN with user data
     const threadData = await Thread.findAll({
@@ -66,6 +66,96 @@ const withAuth = require("../utils/auth");
   } catch (err) {
     res.status(500).json(err);
   }
-}); */
+});
+
+router.get('/categories', async (req, res) => {
+  try {
+    const categoryData = await Category.findAll({});
+    const categories = categoryData.map((category) => category.get({ plain: true }));
+
+    res.render('categories', {
+      categories,
+      logged_in: req.session.logged_in
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/new-category', async (req, res) => {
+  try {
+    res.render('new-category', {
+      logged_in: req.session.logged_in
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/threads/:id', async (req, res) => {
+  try {
+    const threadData = await Thread.findAll({
+      include: [
+        {
+          model: User,
+        },
+        {
+          model: Category,
+          where: { id: req.params.id },
+        },
+      ],
+    });
+
+    const threads = threadData.map((thread) => thread.get({ plain: true }));
+
+    res.render("threads", {
+      threads,
+      logged_in: req.session.logged_in
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/thread/:id', async (req, res) => {
+  try {
+    const threadData = await Thread.findByPk(req.params.id, {
+      include: [
+        {
+          model: Post,
+          include: [
+            {
+              model: User,
+            },
+          ],
+        },
+        {
+          model: User,
+        },
+        {
+          model: Category,
+        },
+      ],
+    });
+
+    const thread = threadData.get({ plain: true });
+
+    res.render("thread", {
+      thread,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+})
+
+router.get('/login', (req, res) => {
+  // If a session exists, redirect the request to the homepage
+  if (req.session.logged_in) {
+    res.redirect('/');
+    return;
+  }
+
+  res.render('login');
+});
 
 module.exports = router;
