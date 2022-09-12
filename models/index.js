@@ -20,6 +20,16 @@ Thread.belongsTo(Category, {
   onDelete: "CASCADE",
 });
 
+User.hasMany(Category, {
+  foreignKey: "user_id",
+  onDelete: "CASCADE",
+});
+
+Category.belongsTo(User, {
+  foreignKey: "user_id",
+  onDelete: "CASCADE",
+});
+
 User.hasMany(Thread, {
   foreignKey: "user_id",
   onDelete: "CASCADE",

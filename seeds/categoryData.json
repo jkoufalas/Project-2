@@ -1,17 +1,22 @@
 [
   {
-    "category_name": "Javascript"
+    "category_name": "Javascript",
+    "user_id": "2"
   },
   {
-    "category_name": "Express JS"
+    "category_name": "Express JS",
+    "user_id": "4"
   },
   {
-    "category_name": "CSS"
+    "category_name": "CSS",
+    "user_id": "2"
   },
   {
-    "category_name": "HTML"
+    "category_name": "HTML",
+    "user_id": "2"
   },
   {
-    "category_name": "SQL"
+    "category_name": "SQL",
+    "user_id": "1"
   }
 ]
