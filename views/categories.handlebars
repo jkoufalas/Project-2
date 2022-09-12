@@ -8,8 +8,8 @@
 </head>
 <body>
     {{#each categories as |category|}}
-    <div class="inline-flex justify-between rounded-2xl m-2.5 border border-double border-slate-300">
-      <div class="m-t-2.5 mr-0">
+    <div class="inline-flex block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+      <div class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
         <h1>
           Category:
           <a href="/threads/{{category.id}}">{{category.category_name}}</a>
@@ -17,31 +17,7 @@
         </h1>
       </div>
     </div>
-  {{/each}}
-
-  {{#each categories as |category|}}
-  <div class="inline-flex justify-between rounded-2xl m-2.5 border border-double border-slate-300">
-    <div class="m-t-2.5 mr-0">
-      <h1>
-        Category:
-        <a href="/threads/{{category.id}}">{{category.category_name}}</a>
-        {{!-- {{category.id}} --}}
-      </h1>
-    </div>
-  </div>
-{{/each}}
-
-{{#each categories as |category|}}
-  <div class="inline-flex justify-between rounded-2xl m-2.5 border border-double border-slate-300">
-    <div class="m-t-2.5 mr-0">
-      <h1>
-        Category:
-        <a href="/threads/{{category.id}}">{{category.category_name}}</a>
-        {{!-- {{category.id}} --}}
-      </h1>
-    </div>
-  </div>
-{{/each}}
+    {{/each}}
 
     {{#if logged_in}}
 <div class="inline-flex justify-between rounded-2xl m-2.5 border border-double border-slate-300">
