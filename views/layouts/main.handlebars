@@ -4,14 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Test Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     {{!-- <link rel="stylesheet" href="/css/jass.css" /> --}}
     {{!-- <link rel="stylesheet" href="/css/style.css" /> --}}
   </head>
 
   <body>
     <div class="flex-column justify-space-around">
-      <header class="display-flex justify-space-between align-center p-2">
-        <nav>
+      <header class="inline-flex justify-between w-full h-32 bg-slate-500 border-b-4 border-double border-slate-300 text-zinc-300">
+        <nav class="self-center">
           <!-- Conditionally render login or logout links -->
           <a href="/">Home</a>
           <a href="/categories">Categories</a>
