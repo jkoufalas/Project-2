@@ -100,6 +100,7 @@ router.get("/categories", async (req, res) => {
     // Pass serialized data and session flag into template
     res.render("categories", {
       categories,
+      logged_in: req.session.logged_in,
     });
   } catch (err) {
     res.status(500).json(err);
@@ -135,6 +136,7 @@ router.get("/threads/:id", async (req, res) => {
 
     res.render("threads", {
       threads,
+      logged_in: req.session.logged_in,
     });
   } catch (err) {
     res.status(500).json(err);
@@ -168,6 +170,7 @@ router.get("/thread/:id", async (req, res) => {
 
     res.render("thread", {
       thread,
+      logged_in: req.session.logged_in,
     });
   } catch (err) {
     res.status(500).json(err);
