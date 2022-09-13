@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Thread, User, Category, Post } = require("../../models");
+const { Thread, User, Category } = require("../../models");
 const withAuth = require("../../utils/auth");
 
 router.get("/:id", async (req, res) => {
@@ -9,6 +9,7 @@ router.get("/:id", async (req, res) => {
       include: [
         {
           model: User,
+          attributes: { exclude: ["password"] },
         },
         {
           model: Category,
