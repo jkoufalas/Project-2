@@ -25,11 +25,21 @@
       {{thread.user.name}}
     </p>
   </div>
-  <p class="pt-5 font-medium"> 
+  <div class="inline-flex w-full">
+    <p class="w-28 font-medium">
+      Subscription:
+    </p>
+    <p class="pl-2">
+      {{count}}
+    </p>
+  </div>
+  <p class="pt-5 font-medium">
     Posts:
   </p>
   {{#each thread.posts as |post|}}
-    <div class="block my-5 p-6 w-full bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+    <div
+      class="block my-5 p-6 w-full bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
+    >
       <p>
         {{post.post}}
       </p>
@@ -44,6 +54,8 @@
     </div>
   {{/each}}
   <div class="inline-flex justify-center w-full">
-    <button class="block py-2 w-32 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">Create post</button>
+    <button
+      class="block py-2 w-32 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
+    >Create post</button>
   </div>
 </div>

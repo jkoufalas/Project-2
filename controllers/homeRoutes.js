@@ -57,6 +57,7 @@ router.get("/", async (req, res) => {
     //const groups = groupData.map((group) => group.get({ plain: true }));
     if (req.session.logged_in) {
       const subscriptionData = await User.findByPk(req.session.user_id, {
+        attributes: { exclude: ["password"] },
         include: [
           {
             model: Thread,
@@ -89,6 +90,7 @@ router.get("/categories", async (req, res) => {
       include: [
         {
           model: User,
+          attributes: { exclude: ["password"] },
         },
       ],
     });
@@ -99,6 +101,7 @@ router.get("/categories", async (req, res) => {
 
     if (req.session.logged_in) {
       const subscriptionData = await User.findByPk(req.session.user_id, {
+        attributes: { exclude: ["password"] },
         include: [
           {
             model: Thread,
@@ -129,6 +132,7 @@ router.get("/new-category", async (req, res) => {
   try {
     if (req.session.logged_in) {
       const subscriptionData = await User.findByPk(req.session.user_id, {
+        attributes: { exclude: ["password"] },
         include: [
           {
             model: Thread,
@@ -160,6 +164,7 @@ router.get("/threads/:id", async (req, res) => {
       include: [
         {
           model: User,
+          attributes: { exclude: ["password"] },
         },
         {
           model: Category,
@@ -172,6 +177,7 @@ router.get("/threads/:id", async (req, res) => {
 
     if (req.session.logged_in) {
       const subscriptionData = await User.findByPk(req.session.user_id, {
+        attributes: { exclude: ["password"] },
         include: [
           {
             model: Thread,
@@ -186,6 +192,7 @@ router.get("/threads/:id", async (req, res) => {
     } else {
       var subs = null;
     }
+
     res.render("threads", {
       threads,
       subs,
@@ -207,11 +214,13 @@ router.get("/thread/:id", async (req, res) => {
           include: [
             {
               model: User,
+              attributes: { exclude: ["password"] },
             },
           ],
         },
         {
           model: User,
+          attributes: { exclude: ["password"] },
         },
         {
           model: Category,
@@ -223,6 +232,7 @@ router.get("/thread/:id", async (req, res) => {
 
     if (req.session.logged_in) {
       const subscriptionData = await User.findByPk(req.session.user_id, {
+        attributes: { exclude: ["password"] },
         include: [
           {
             model: Thread,
@@ -238,10 +248,18 @@ router.get("/thread/:id", async (req, res) => {
       var subs = null;
     }
 
+    const count = await Subscription.count({
+      where: {
+        thread_id: req.params.id,
+        user_id: req.session.user_id,
+      },
+    });
+
     res.render("thread", {
       thread,
       subs,
       logged_in: req.session.logged_in,
+      count,
     });
   } catch (err) {
     res.status(500).json(err);
