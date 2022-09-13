@@ -30,7 +30,11 @@
       Subscription:
     </p>
     <p class="pl-2">
-      {{count}}
+      {{#if subscribed}}
+        Subscribed
+      {{else}}
+        Not Subscribed
+      {{/if}}
     </p>
   </div>
   <div class="inline-flex w-full">
@@ -38,7 +42,11 @@
       Freeze:
     </p>
     <p class="pl-2">
-      {{isCreator}}
+      {{#if isCreator}}
+        Creator
+      {{else}}
+        Not Creator
+      {{/if}}
     </p>
   </div>
   <p class="pt-5 font-medium">
