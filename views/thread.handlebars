@@ -46,7 +46,7 @@
   </p>
   {{#each thread.posts as |post|}}
     <div
-      class="block my-5 p-6 w-full bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
+      class="block my-5 p-6 w-full bg-white rounded-lg border border-gray-200 shadow-md"
     >
       <p>
         {{post.post}}
@@ -61,17 +61,25 @@
       </div>
     </div>
   {{/each}}
-  <div class="inline-flex justify-center w-full">
-    <form class="form post-form">
-      <div class="form-group">
-        <label for="new-post">Post:</label>
-        <input class="form-input" type="textarea" id="new-post" />
+
+  {{#if logged_in}}
+    <form class="form post-form inline-flex w-full">
+      <div class="form-group w-11/12">
+        <input
+          class="form-input h-10 w-full border border-gray-200 shadow-md"
+          type="text"
+          placeholder="Create new post..."
+          id="new-post"
+        />
       </div>
-      <div class="form-group">
-        <button class="btn btn-primary" type="submit">Submit</button>
+      <div class="form-group w-1/12">
+        <button
+          class="w-full bg-slate-500 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline btn btn-primary"
+          type="submit"
+        >Create</button>
       </div>
     </form>
-  </div>
+  {{/if}}
 </div>
 
 <script src="../js/post.js"></script>
