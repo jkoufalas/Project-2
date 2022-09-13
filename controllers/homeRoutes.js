@@ -244,6 +244,7 @@ router.get("/thread/:id", async (req, res) => {
       var subs = subscriptionData.get({ plain: true });
 
       let subscribed;
+      let isCreator;
 
       var count = await Subscription.count({
         where: {
@@ -258,17 +259,23 @@ router.get("/thread/:id", async (req, res) => {
         subscribed = false;
       }
 
-      var isCreator = await Thread.count({
+      var countCreator = await Thread.count({
         where: {
           id: req.params.id,
           user_id: req.session.user_id,
         },
       });
+
+      if (countCreator) {
+        isCreator = true;
+      } else {
+        isCreator = false;
+      }
     } else {
       var subs = null;
 
       var subscribed = false;
-      var isCreator = 0;
+      var isCreator = false;
     }
 
     res.render("thread", {
