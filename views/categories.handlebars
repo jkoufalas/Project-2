@@ -3,18 +3,17 @@
     Categories
   </p>
   {{#each categories as |category|}}
-    <button class="w-full p-3 m-3 text-center font-medium bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700" id="{{category.id}}">
-      {{!-- <div class="category text-2xl font-bold tracking-tight text-gray-900 dark:text-white whitespace-nowrap" id="{{category.id}}"> --}}
+    <button class="w-full p-3 m-3 text-center font-medium bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100" id="{{category.id}}">
         {{category.category_name}}
-      {{!-- </div> --}}
     </button>
   {{/each}}
+
+
+  {{#if logged_in}}
+  <button class="w-full p-3 m-3 text-center font-medium bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100" id="new-category">
+    Add category
+  </button>
+  {{/if}}
 </div>
 
-{{#if logged_in}}
-  <div class="inline-flex justify-between rounded-2xl m-2.5 border border-double border-slate-300">
-    <a href="/new-category">Add category</button>
-  </div>
-{{/if}}
-
-<script src="./js/threads.js"></script>
+<script src="./js/categories.js"></script>
