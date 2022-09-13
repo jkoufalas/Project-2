@@ -14,24 +14,21 @@
       <header
         class="inline-flex justify-between w-full h-32 bg-slate-500 border-b-4 border-double border-slate-300 text-zinc-300"
       >
-        <nav class="self-center">
+        <nav class="nav self-center inline-flex w-full justify-start p-5">
           <!-- Conditionally render login or logout links -->
-          <a href="/">Home</a>
-          <a href="/categories">Categories</a>
+          <button class="no-button m-2" id="home">Home</button>
+          <button class="no-button m-2" id="categories">Categories</button>
           {{#if logged_in}}
-            <a href="/groups">Groups</a>
-            <a href="/profile">Profile</a>
-            <button class="no-button" id="logout">Logout</button>
+            <button class="no-button m-2" id="groups">Groups</button>
+            <button class="no-button m-2" id="profile">Profile</button>
+            <button class="no-button m-2" id="logout">Logout</button>
           {{else}}
-            <a href="/login"><button
-                class="no-button"
-                id="logout"
-              >Login</button></a>
+          <button class="no-button m-2" id="login">Login</button>
           {{/if}}
         </nav>
       </header>
-      <main
-        class="flex items-center justify-center container container-fluid m-6 p-8"
+      <main class="m-5"
+        {{!-- class="flex items-center justify-center container container-fluid m-6 p-8 w-full" --}}
       >
         <!-- Render the sub layout -->
         {{{body}}}
@@ -41,6 +38,7 @@
       </footer>
     </div>
 
+    <script src="/js/navigation.js"></script>
     <!-- Render script for logged in users only -->
     {{#if logged_in}}
       <script src="/js/logout.js"></script>
