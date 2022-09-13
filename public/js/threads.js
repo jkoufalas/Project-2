@@ -6,6 +6,5 @@ categorySpan.addEventListener('click', function(event) {
 
     if (element.matches("button") === true) {
         document.location.replace('/threads/' + id);
-        console.log(id);
     }
 });
