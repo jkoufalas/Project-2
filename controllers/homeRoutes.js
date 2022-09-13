@@ -243,8 +243,8 @@ router.get("/thread/:id", async (req, res) => {
       // Serialize data so the template can read it
       var subs = subscriptionData.get({ plain: true });
 
-      let subscribed;
-      let isCreator;
+      var subscribed;
+      var isCreator;
 
       var count = await Subscription.count({
         where: {
