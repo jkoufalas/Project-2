@@ -7,6 +7,7 @@ const {
   GroupMembership,
   Message,
   User,
+  Subscription,
 } = require("../models");
 
 const userData = require("./userData.json");
@@ -17,6 +18,7 @@ const categoryData = require("./categoryData.json");
 const groupData = require("./groupData.json");
 const groupMembershipData = require("./groupMembershipData.json");
 const messageData = require("./messageData.json");
+const subscriptionsData = require("./subscriptionsData.json");
 
 const seedDatabase = async () => {
   await sequelize.sync({ force: true });
@@ -50,6 +52,9 @@ const seedDatabase = async () => {
   );
 
   const messages = await Message.bulkCreate(messageData, {
+    returning: true,
+  });
+  const subscriptions = await Subscription.bulkCreate(subscriptionsData, {
     returning: true,
   });
 
