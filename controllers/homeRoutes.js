@@ -243,12 +243,20 @@ router.get("/thread/:id", async (req, res) => {
       // Serialize data so the template can read it
       var subs = subscriptionData.get({ plain: true });
 
+      let subscribed;
+
       var count = await Subscription.count({
         where: {
           thread_id: req.params.id,
           user_id: req.session.user_id,
         },
       });
+
+      if (count) {
+        subscribed = true;
+      } else {
+        subscribed = false;
+      }
 
       var isCreator = await Thread.count({
         where: {
@@ -258,19 +266,16 @@ router.get("/thread/:id", async (req, res) => {
       });
     } else {
       var subs = null;
-      var count = 0;
+
+      var subscribed = false;
       var isCreator = 0;
     }
-
-    console.log("----------------------------------------------");
-    console.log(isCreator);
-    console.log("----------------------------------------------");
 
     res.render("thread", {
       thread,
       subs,
       logged_in: req.session.logged_in,
-      count,
+      subscribed,
       isCreator,
     });
   } catch (err) {
