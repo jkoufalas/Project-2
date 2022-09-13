@@ -41,6 +41,10 @@ Thread.init(
         key: "id",
         unique: false,
       },
+      is_active: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
+      },
     },
   },
   {
