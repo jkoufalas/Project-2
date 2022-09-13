@@ -1,30 +1,35 @@
 <!-- Loop over each object in the projects array -->
-{{!-- {{#each threads as |thread|}}
+{{#if logged_in}}
   <div class="row mb-4 project">
     <div class="col-md-5">
       <h1>
-        Category:
-        {{thread.category.category_name}}
+        name
+        {{{subs.name}}}
       </h1>
       <h2>
-        Thread:
-        {{thread.id}}
-        {{thread.thread_name}}
+        email:
+        {{{subs.email}}}
       </h2>
-      <p>User created thread:
-        {{thread.user.name}}
-      </p>
-      <p>Posts:
-        {{#each thread.posts as |post|}}
+      <h3>
+        Subscribed threads:
+        {{#each subs.users_subscribed_threads as |threads|}}
           <p>
-            {{post.post}}
-            {{post.user.name}}
+            {{threads.thread_name}}
           </p>
         {{/each}}
-      </p>
+      </h3>
     </div>
   </div>
-{{/each}} --}}
+
+{{else}}
+  <div class="row mb-4 project">
+    <div class="col-md-5">
+      <h1>
+        Please Log in to see subscribed threads
+      </h1>
+    </div>
+  </div>
+{{/if}}
 
 <!-- Loop over each object in the projects array -->
 {{!-- {{#each groups as |group|}}
