@@ -12,7 +12,7 @@
     <p class="w-28 font-medium">
       Thread:
     </p>
-    <p class="pl-2">
+    <p class="pl-2" id="thread-id" thread="{{thread.id}}">
       #{{thread.id}}
       {{thread.thread_name}}
     </p>
@@ -62,8 +62,16 @@
     </div>
   {{/each}}
   <div class="inline-flex justify-center w-full">
-    <button
-      class="block py-2 w-32 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
-    >Create post</button>
+    <form class="form post-form">
+      <div class="form-group">
+        <label for="new-post">Post:</label>
+        <input class="form-input" type="textarea" id="new-post" />
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary" type="submit">Submit</button>
+      </div>
+    </form>
   </div>
 </div>
+
+<script src="../js/post.js"></script>
