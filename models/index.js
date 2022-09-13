@@ -6,6 +6,7 @@ const Post = require("./Post");
 const Group = require("./Group");
 const GroupMembership = require("./GroupMembership");
 const Message = require("./Message");
+const Subscription = require("./Subscription");
 
 /*------------------------------------------------------------
 // This portion Implements the Threads portion of the database
@@ -60,6 +61,26 @@ Post.belongsTo(User, {
   onDelete: "CASCADE",
 });
 
+Thread.belongsToMany(User, {
+  // Define the third table needed to store the foreign keys
+  through: {
+    model: Subscription,
+    unique: false,
+  },
+  // Define an alias for when data is retrieved
+  as: "threads_subscription",
+});
+
+User.belongsToMany(Thread, {
+  // Define the third table needed to store the foreign keys
+  through: {
+    model: Subscription,
+    unique: false,
+  },
+  // Define an alias for when data is retrieved
+  as: "users_subscribed_threads",
+});
+
 /*------------------------------------------------------------
 // This portion Implements the Groups portion of the database
 ------------------------------------------------------------*/
@@ -112,4 +133,5 @@ module.exports = {
   Group,
   Message,
   GroupMembership,
+  Subscription,
 };
