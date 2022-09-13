@@ -245,6 +245,7 @@ router.get("/thread/:id", async (req, res) => {
 
       var subscribed;
       var isCreator;
+      //variables for subscription and freezing post
 
       var count = await Subscription.count({
         where: {
