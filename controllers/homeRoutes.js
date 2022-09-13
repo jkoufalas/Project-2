@@ -32,9 +32,7 @@ router.get("/", async (req, res) => {
         },
       ],
     });
-
     const threads = threadData.map((thread) => thread.get({ plain: true }));
-
     const groupData = await Group.findAll({
       include: [
         {
@@ -244,22 +242,48 @@ router.get("/thread/:id", async (req, res) => {
 
       // Serialize data so the template can read it
       var subs = subscriptionData.get({ plain: true });
+
+      let subscribed;
+      let isCreator;
+
+      var count = await Subscription.count({
+        where: {
+          thread_id: req.params.id,
+          user_id: req.session.user_id,
+        },
+      });
+
+      if (count) {
+        subscribed = true;
+      } else {
+        subscribed = false;
+      }
+
+      var countCreator = await Thread.count({
+        where: {
+          id: req.params.id,
+          user_id: req.session.user_id,
+        },
+      });
+
+      if (countCreator) {
+        isCreator = true;
+      } else {
+        isCreator = false;
+      }
     } else {
       var subs = null;
-    }
 
-    const count = await Subscription.count({
-      where: {
-        thread_id: req.params.id,
-        user_id: req.session.user_id,
-      },
-    });
+      var subscribed = false;
+      var isCreator = false;
+    }
 
     res.render("thread", {
       thread,
       subs,
       logged_in: req.session.logged_in,
-      count,
+      subscribed,
+      isCreator,
     });
   } catch (err) {
     res.status(500).json(err);
