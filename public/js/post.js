@@ -29,14 +29,11 @@ const subThreadHandler = async (event) => {
   const thread_id = document.querySelector("#thread-id").getAttribute("thread");
 
   if (subStatus === "true") {
-    console.log("--------------------Subscribe------------------------");
     var response = await fetch(`/api/subscription/${thread_id}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
     });
   } else {
-    console.log("-----------------Un-Subscribe------------------------");
-
     var response = await fetch(`/api/subscription/${thread_id}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
