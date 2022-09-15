@@ -1,6 +1,16 @@
 {{> sidebar}}
 
 <!-- Loop over each object in the projects array -->
+{{#each threads as |thread|}}
+  <div class="block mb-6 mr-6 pr-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+    <div class="m-5 mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+        Thread:
+        <a href="/thread/{{thread.id}}">
+        {{thread.id}}.
+        {{thread.thread_name}}
+        </a>
+        {{format_date thread.date_created}}
+<!-- Loop over each object in the projects array -->
 <div class="threads-span row m-4 project w-full">
   <div class="inline-flex w-full">
     <p class="w-28 font-medium">
