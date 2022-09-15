@@ -87,6 +87,7 @@
   {{/each}}
 
   {{#if logged_in}}
+  {{#if thread.is_active}}
     <form class="form post-form inline-flex w-full">
       <div class="form-group w-10/12">
         <input
