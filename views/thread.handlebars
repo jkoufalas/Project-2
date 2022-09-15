@@ -1,3 +1,5 @@
+{{> sidebar}}
+
 <!-- Loop over each object in the projects array -->
 <div class="row m-4 project w-full">
   <div class="inline-flex w-full">
@@ -69,18 +71,16 @@
     Posts:
   </p>
   {{#each thread.posts as |post|}}
-    <div
-      class="block my-5 p-6 w-full bg-white rounded-lg border border-gray-200 shadow-md"
-    >
+    <div class="block my-5 p-6 w-full bg-white rounded-lg border border-gray-200 shadow-md">
       <p>
         {{post.post}}
       </p>
-      <div class="inline-flex pt-3">
+      <div class="inline-flex pt-3 text-sm italic text-slate-400">
         <p class="text-sm">
-          {{post.user.name}}
+          posted by <p class="pl-1 font-bold">{{post.user.name}}</p>
         </p>
-        <p class="pl-2 text-sm italic text-slate-400">
-          {{post.date_created}}
+        <p class="pl-1 text-sm italic text-slate-400">
+          on {{post.date_created}}
         </p>
       </div>
     </div>
