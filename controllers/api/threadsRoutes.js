@@ -43,13 +43,19 @@ router.post("/", withAuth, async (req, res) => {
 
 router.post("/activate/:id", withAuth, async (req, res) => {
   try {
-    const activateThread = await Thread.update({
-      is_active: true,
-      where: {
-        thread_id: req.params.id,
-        user_id: req.session.user_id,
+    console.log("---------------1-------------------------------------");
+
+    const activateThread = await Thread.update(
+      {
+        is_active: true,
       },
-    });
+      {
+        where: {
+          id: req.params.id,
+          user_id: req.session.user_id,
+        },
+      }
+    );
 
     res.status(200).json(activateThread);
   } catch (err) {
@@ -59,13 +65,18 @@ router.post("/activate/:id", withAuth, async (req, res) => {
 
 router.post("/deactivate/:id", withAuth, async (req, res) => {
   try {
-    const deactivateThread = await Thread.update({
-      is_active: false,
-      where: {
-        thread_id: req.params.id,
-        user_id: req.session.user_id,
+    console.log("----------------------------------------------------");
+    const deactivateThread = await Thread.update(
+      {
+        is_active: false,
       },
-    });
+      {
+        where: {
+          id: req.params.id,
+          user_id: req.session.user_id,
+        },
+      }
+    );
 
     res.status(200).json(deactivateThread);
   } catch (err) {

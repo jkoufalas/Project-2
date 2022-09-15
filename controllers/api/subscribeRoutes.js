@@ -19,7 +19,7 @@ router.delete("/:id", withAuth, async (req, res) => {
   try {
     const deleteSubscription = await Subscription.destroy({
       where: {
-        id: req.params.id,
+        thread_id: req.params.id,
         user_id: req.session.user_id,
       },
     });
