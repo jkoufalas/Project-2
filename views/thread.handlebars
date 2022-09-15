@@ -27,21 +27,22 @@
   </div>
   <div class="inline-flex w-full">
     <p class="pl-2">
-      {{subscribed}}
-      {{#if subscribed}}
-        <button
-          class="w-full bg-slate-500 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline btn btn-primary"
-          type="submit"
-          subscribed="false"
-          id="subscription"
-        >Unsubscribe</button>
-      {{else}}
-        <button
-          class="w-full bg-slate-500 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline btn btn-primary"
-          type="submit"
-          subscribed="true"
-          id="subscription"
-        >Subscribe</button>
+      {{#if logged_in}}
+        {{#if subscribed}}
+          <button
+            class="w-full bg-slate-500 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline btn btn-primary"
+            type="submit"
+            subscribed="false"
+            id="subscription"
+          >UnSubscribe</button>
+        {{else}}
+          <button
+            class="w-full bg-slate-500 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline btn btn-primary"
+            type="submit"
+            subscribed="true"
+            id="subscription"
+          >Subscribe</button>
+        {{/if}}
       {{/if}}
     </p>
     <p class="pl-2">
