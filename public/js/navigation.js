@@ -6,10 +6,10 @@ navigationSpan.addEventListener('click', function(event) {
 
     if (element.matches("button") === true) {
         if (id == 'home') {
-            document.location.replace('/');
+            document.location.assign('/');
         } else if (id == 'logout') {
         } else {
-            document.location.replace('/' + id);
+            document.location.assign('/' + id);
         }
     }
 });

@@ -6,9 +6,9 @@ categorySpan.addEventListener('click', function(event) {
 
     if (element.matches("button") === true) {
         if (id == 'new-category') {
-            document.location.replace('/' + id);
+            document.location.assign('/' + id);
         } else {
-        document.location.replace('/threads/' + id);
+            document.location.assign('/threads/' + id);
         }
     }
 });

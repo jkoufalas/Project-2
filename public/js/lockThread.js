@@ -23,7 +23,7 @@ const lockThreadHandler = async (event) => {
   const answer = await response.json();
 
   if (response.ok) {
-    document.location.replace("/thread/" + thread_id);
+    document.location.assign("/thread/" + thread_id);
   } else {
     alert(answer.errors[0].message);
   }
