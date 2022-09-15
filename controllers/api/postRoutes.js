@@ -4,12 +4,28 @@ const withAuth = require("../../utils/auth");
 
 router.post("/", withAuth, async (req, res) => {
   try {
-    const newPost = await Post.create({
-      ...req.body,
-      user_id: req.session.user_id,
-    });
+    const threadData = await Thread.findByPk(req.body.thread_id);
 
-    res.status(200).json(newPost);
+    var thread = threadData.get({ plain: true });
+
+    if (thread.is_active) {
+      const newPost = await Post.create({
+        ...req.body,
+        user_id: req.session.user_id,
+      });
+      res.status(200).json(newPost);
+    } else {
+      const note = {
+        title: "Error",
+        test: "Thead is inActive and cannot be posted to.",
+      };
+
+      const response = {
+        status: "error",
+        body: note,
+      };
+      res.status(400).json(response);
+    }
   } catch (err) {
     res.status(400).json(err);
   }

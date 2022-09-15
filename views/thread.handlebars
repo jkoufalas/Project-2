@@ -1,3 +1,5 @@
+{{> sidebar}}
+
 <!-- Loop over each object in the projects array -->
 <div class="row m-4 project w-full">
   <div class="inline-flex w-full">
@@ -26,37 +28,59 @@
     </p>
   </div>
   <div class="inline-flex w-full">
-    <p class="w-28 font-medium">
-      Subscription:
+    <p class="pl-2">
+      {{#if logged_in}}
+        {{#if subscribed}}
+          <button
+            class="w-full bg-slate-500 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline btn btn-primary"
+            type="submit"
+            subscribed="false"
+            id="subscription"
+          >UnSubscribe</button>
+        {{else}}
+          <button
+            class="w-full bg-slate-500 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline btn btn-primary"
+            type="submit"
+            subscribed="true"
+            id="subscription"
+          >Subscribe</button>
+        {{/if}}
+      {{/if}}
     </p>
     <p class="pl-2">
-      {{count}}
-    </p>
-  </div>
-  <div class="inline-flex w-full">
-    <p class="w-28 font-medium">
-      Freeze:
-    </p>
-    <p class="pl-2">
-      {{isCreator}}
+      {{#if isCreator}}
+        {{#if thread.is_active}}
+          <button
+            class="w-full bg-slate-500 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline btn btn-primary"
+            type="submit"
+            locked="false"
+            id="locked"
+          >Suspend Thread</button>
+        {{else}}
+          <button
+            class="w-full bg-slate-500 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline btn btn-primary"
+            type="submit"
+            locked="true"
+            id="locked"
+          >Resume Thread</button>
+        {{/if}}
+      {{/if}}
     </p>
   </div>
   <p class="pt-5 font-medium">
     Posts:
   </p>
   {{#each thread.posts as |post|}}
-    <div
-      class="block my-5 p-6 w-full bg-white rounded-lg border border-gray-200 shadow-md"
-    >
+    <div class="block my-5 p-6 w-full bg-white rounded-lg border border-gray-200 shadow-md">
       <p>
         {{post.post}}
       </p>
-      <div class="inline-flex pt-3">
+      <div class="inline-flex pt-3 text-sm italic text-slate-400">
         <p class="text-sm">
-          {{post.user.name}}
+          posted by <p class="pl-1 font-bold">{{post.user.name}}</p>
         </p>
-        <p class="pl-2 text-sm italic text-slate-400">
-          {{post.date_created}}
+        <p class="pl-1 text-sm italic text-slate-400">
+          on {{post.date_created}}
         </p>
       </div>
     </div>
@@ -79,7 +103,11 @@
         >Create</button>
       </div>
     </form>
+
   {{/if}}
 </div>
 
-<script src="../js/post.js"></script>
+{{#if isCreator}}
+  <script src="../js/lockThread.js"></script>
+{{/if}}
+

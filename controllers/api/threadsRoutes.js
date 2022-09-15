@@ -1,5 +1,6 @@
 const router = require("express").Router();
-const { Thread, User, Category, Post } = require("../../models");
+const emailConnection = require("../../config/email_connection");
+const { Thread, User, Category, Post, Subscription } = require("../../models");
 const withAuth = require("../../utils/auth");
 
 router.get("/:id", async (req, res) => {
@@ -43,13 +44,17 @@ router.post("/", withAuth, async (req, res) => {
 
 router.post("/activate/:id", withAuth, async (req, res) => {
   try {
-    const activateThread = await Thread.update({
-      is_active: true,
-      where: {
-        thread_id: req.params.id,
-        user_id: req.session.user_id,
+    const activateThread = await Thread.update(
+      {
+        is_active: true,
       },
-    });
+      {
+        where: {
+          id: req.params.id,
+          user_id: req.session.user_id,
+        },
+      }
+    );
 
     res.status(200).json(activateThread);
   } catch (err) {
@@ -59,12 +64,52 @@ router.post("/activate/:id", withAuth, async (req, res) => {
 
 router.post("/deactivate/:id", withAuth, async (req, res) => {
   try {
-    const deactivateThread = await Thread.update({
-      is_active: false,
-      where: {
-        thread_id: req.params.id,
-        user_id: req.session.user_id,
+    const usersSubscribed = await Thread.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+          through: Subscription,
+          as: "threads_subscription",
+        },
+        {
+          model: User,
+        },
+      ],
+    });
+
+    var thread = usersSubscribed.get({ plain: true });
+
+    const deactivateThread = await Thread.update(
+      {
+        is_active: false,
       },
+      {
+        where: {
+          id: req.params.id,
+          user_id: req.session.user_id,
+        },
+      }
+    );
+
+    thread.threads_subscription.map((user) => {
+      let message = {
+        from: process.env.EMAIL_USER,
+        to: user.email,
+        subject: `Thread #${thread.id} ${thread.thread_name} has been Suspended`,
+        text: `This thread has been suspended by its Creator ${thread.user.name}`,
+      };
+
+      emailConnection.sendMail(message, function (error, info) {
+        if (error) {
+          console.log(
+            `Error Occured sending Email for suspension of thread #${thread.id} to ${user.email}`
+          );
+        } else {
+          console.log(
+            `Email of Suspension thread #${thread.id} to ${user.email} sent successfully`
+          );
+        }
+      });
     });
 
     res.status(200).json(deactivateThread);

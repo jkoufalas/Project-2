@@ -1,0 +1,14 @@
+{{#if logged_in}}
+    <div class="w-52 min-h-screen bg-slate-500 text-zinc-300 p-2">
+        <h2 class="font-bold">Subscribed threads:</h2>
+        <ul>
+            {{#each subs.users_subscribed_threads as |threads|}}
+            <li class="pl-3 pt-1">
+                <a href="/thread/{{threads.id}}" class="hover:text-zinc-400">
+                    {{threads.thread_name}}
+                </a>
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+{{/if}}
