@@ -1,19 +1,24 @@
 <!-- Loop over each object in the projects array -->
-{{#each threads as |thread|}}
-  <div class="block mb-6 mr-6 pr-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-    <div class="m-5 mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-        Thread:
-        <a href="/thread/{{thread.id}}">
-        {{thread.id}}.
-        {{thread.thread_name}}
-        </a>
-        {{thread.date_created}}
-
-      </h2>
-      <p class="font-normal text-gray-700 dark:text-gray-400">User created thread:
-        {{thread.user.name}}
-        {{thread.user.email}}
-      </p>
-    </div>
+<div class="threads-span row m-4 project w-full">
+  <div class="inline-flex w-full">
+    <p class="w-28 font-medium">
+      Category:
+    </p>
+    <p class="pl-2">
+      {{threads.[0].category.category_name}}
+    </p>
   </div>
-{{/each}}
+  <p class="pt-5 font-medium"> 
+    Threads:
+  </p>
+  {{#each threads as |thread|}}
+    <button class="block my-5 p-6 w-full bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100" id="{{thread.id}}">
+      {{thread.thread_name}}
+      {{thread.user.name}}
+      {{thread.user.email}}
+      {{thread.date_created}}
+    </button>
+  {{/each}}
+</div>
+
+<script src="../js/threads.js"></script>
