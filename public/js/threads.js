@@ -1,10 +1,10 @@
-const categorySpan = document.querySelector(".category-span");
+const threadsSpan = document.querySelector('.threads-span');
 
-categorySpan.addEventListener("click", function (event) {
-  let element = event.target;
-  let id = element.getAttribute("id");
+threadsSpan.addEventListener('click', function(event) {
+    let element = event.target;
+    let id = element.getAttribute('id');
 
-  if (element.matches("button") === true) {
-    document.location.replace("/threads/" + id);
-  }
+    if (element.matches("button") === true) {
+        document.location.assign('/thread/' + id);
+    }
 });
