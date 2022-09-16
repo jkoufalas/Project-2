@@ -1,31 +1,28 @@
+{{> sidebar}}
+
+
 <!-- Loop over each object in the projects array -->
 <div class="threads-span row m-4 project w-full">
-  <div class="inline-flex w-full">
-    <p class="w-28 font-medium">
-      Category:
-    </p>
-    <p class="pl-2">
+  <div class="justify-center inline-flex w-full">
+        <p class="pl-2 text-5xl font-bold tracking-tight text-bg-gray-800">
       {{threads.0.category.category_name}}
     </p>
   </div>
-  <p class="pt-5 font-medium">
-    Threads:
-  </p>
   <div class="inline-flex w-full flex-wrap">
     {{#each threads as |thread|}}
 
       <div
-        class="p-6 m-4 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
+        class="p-6 m-4 max-w-sm rounded-lg border border-gray-200 shadow-md bg-gray-800"
       >
         <h5
-          class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+          class="mb-2 text-2xl font-bold tracking-tight text-white"
         >{{thread.thread_name}}</h5>
-        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Created By:
+        <p class="mb-3 font-normal text-gray-400">Created By:
           {{thread.user.name}}
           on
           {{format_date thread.date_created}}</p>
         <button
-          class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-800"
           id="{{thread.id}}"
         >
           Read more

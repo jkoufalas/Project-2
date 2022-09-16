@@ -13,46 +13,6 @@ const withAuth = require("../utils/auth");
 
 router.get("/", async (req, res) => {
   try {
-    // Get all projects and JOIN with user data
-    /* const threadData = await Thread.findAll({
-      include: [
-        {
-          model: Post,
-          include: [
-            {
-              model: User,
-            },
-          ],
-        },
-        {
-          model: User,
-        },
-        {
-          model: Category,
-        },
-      ],
-    });
-    const threads = threadData.map((thread) => thread.get({ plain: true }));
-    const groupData = await Group.findAll({
-      include: [
-        {
-          model: Message,
-          include: [
-            {
-              model: User,
-            },
-          ],
-        },
-        {
-          model: User,
-          through: GroupMembership,
-          as: "group_members",
-        },
-      ],
-    }); */
-
-    // Serialize data so the template can read it
-    //const groups = groupData.map((group) => group.get({ plain: true }));
     if (req.session.logged_in) {
       const subscriptionData = await User.findByPk(req.session.user_id, {
         attributes: { exclude: ["password"] },
