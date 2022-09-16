@@ -28,6 +28,8 @@ const subThreadHandler = async (event) => {
 
   const thread_id = document.querySelector("#thread-id").getAttribute("thread");
 
+  console.log(subStatus);
+
   if (subStatus === "true") {
     var response = await fetch(`/api/subscription/${thread_id}`, {
       method: "POST",
