@@ -31,13 +31,17 @@ router.get("/:id", async (req, res) => {
 
 router.post("/", withAuth, async (req, res) => {
   try {
+    console.log("-11212--1212--------------------------");
     const newThread = await Thread.create({
       ...req.body,
       user_id: req.session.user_id,
     });
 
+    console.log(newThread);
+
     res.status(200).json(newThread);
   } catch (err) {
+    console.log(err);
     res.status(400).json(err);
   }
 });

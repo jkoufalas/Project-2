@@ -115,6 +115,35 @@ router.get("/new-category", async (req, res) => {
   }
 });
 
+router.get("/new-thread", async (req, res) => {
+  try {
+    if (req.session.logged_in) {
+      const subscriptionData = await User.findByPk(req.session.user_id, {
+        attributes: { exclude: ["password"] },
+        include: [
+          {
+            model: Thread,
+            through: Subscription,
+            as: "users_subscribed_threads",
+          },
+        ],
+      });
+
+      // Serialize data so the template can read it
+      var subs = subscriptionData.get({ plain: true });
+    } else {
+      var subs = null;
+    }
+
+    res.render("new-thread", {
+      logged_in: req.session.logged_in,
+      subs,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 router.get("/threads/:id", async (req, res) => {
   try {
     // Get all projects and JOIN with user data
