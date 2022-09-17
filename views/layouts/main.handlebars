@@ -18,7 +18,7 @@
   <nav class="relative px-4 py-4 flex justify-between items-center bg-gray-900 border-gray-200">
 		
     <span
-            class="self-center text-xl font-semibold whitespace-nowrap text-white"
+            class="self-center text-3xl font-semibold whitespace-nowrap text-white font-mono tracking-widest"
           >codeIt   <i class="fas fa-terminal p-1"></i></span>
 		<div class="lg:hidden">
 			<button class="navbar-burger flex items-center text-blue-600 p-3">
@@ -29,12 +29,12 @@
 			</button>
 		</div> 
 		<ul class="nav hidden absolute top-1/2 right-0 transform -translate-y-1/2 -translate-x-1/4 lg:flex lg:mx-auto lg:flex lg:w-auto lg:space-x-6 md:font-medium">
-			<li><button class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 text-gray-400 md:hover:text-white hover:bg-gray-700 hover:text-white md:hover:bg-transparent" id="home">Home</button></li>
-			<li><button class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 text-gray-400 md:hover:text-white hover:bg-gray-700 hover:text-white md:hover:bg-transparent" id="categories">Categories</button></li>
+			<li><button class="font-mono block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 text-gray-400 md:hover:text-white hover:bg-gray-700 hover:text-white md:hover:bg-transparent" id="home">Home</button></li>
+			<li><button class="font-mono block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 text-gray-400 md:hover:text-white hover:bg-gray-700 hover:text-white md:hover:bg-transparent" id="categories">Categories</button></li>
             {{#if logged_in}}
-			<li><button class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 text-gray-400 md:hover:text-white hover:bg-gray-700 hover:text-white md:hover:bg-transparent" id="logout-burger">Logout</button></li>
+			<li><button class="font-mono block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 text-gray-400 md:hover:text-white hover:bg-gray-700 hover:text-white md:hover:bg-transparent" id="logout-burger">Logout</button></li>
             {{else}}
-			<li><button class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 text-gray-400 md:hover:text-white hover:bg-gray-700 hover:text-white md:hover:bg-transparent" id="login">Login</button></li>
+			<li><button class="font-mono block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 text-gray-400 md:hover:text-white hover:bg-gray-700 hover:text-white md:hover:bg-transparent" id="login">Login</button></li>
             {{/if}}
 		</ul>
 	</nav>

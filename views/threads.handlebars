@@ -5,25 +5,24 @@
 <div class="row m-4 project w-full">
   <div class="threads-span">
     <div class="justify-center inline-flex w-full">
-          <p class="pl-2 text-5xl font-bold tracking-tight text-bg-gray-800" id="category-id" category="{{threads.0.category.id}}">
+          <p class="font-mono pl-2 text-3xl font-bold tracking-tight text-bg-gray-800" id="category-id" category="{{threads.0.category.id}}">
         {{threads.0.category.category_name}}
       </p>
     </div>
-    <div class="inline-flex w-full flex-wrap">
+    <div class="inline-flex w-full flex-wrap justify-center">
       {{#each threads as |thread|}}
-
         <div
         class="p-6 m-4 max-w-sm rounded-lg border border-gray-200 shadow-md bg-gray-800"
-        >
-          <h5
-          class="mb-2 text-2xl font-bold tracking-tight text-white"
-          >{{thread.thread_name}}</h5>
-          <p class="mb-3 font-normal text-gray-400">Created By:
+      >
+        <h5
+          class="font-mono mb-2 text-xl font-bold tracking-tight text-white"
+        >{{thread.thread_name}}</h5>
+        <p class="font-mono mb-3 text-sm font-normal text-gray-400">Created By:
           {{thread.user.name}}
           on
           {{format_date thread.date_created}}</p>
-          <button
-          class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-800"
+        <button
+          class="font-mono inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-800"
           id="{{thread.id}}"
           >
           Read more
