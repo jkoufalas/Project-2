@@ -3,33 +3,81 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>codeIt</title>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
     <script src="https://cdn.tailwindcss.com"></script>
+    
   </head>
 
   <body>
-    <div class="flex-column justify-space-around">
-      <header
-        class="inline-flex justify-between w-full h-32 bg-slate-500 border-b-4 border-double border-slate-300 text-zinc-300"
-      >
-        <nav class="nav self-center inline-flex w-full justify-start p-5">
-          <!-- Conditionally render login or logout links -->
-          <button class="no-button m-2" id="home">Home</button>
-          <button class="no-button m-2" id="categories">Categories</button>
-          {{#if logged_in}}
-            {{!-- Delete Profile button??? For future development --}}
-            {{!-- <button class="no-button m-2" id="profile">Profile</button> --}}
-            <button class="no-button m-2" id="logout">Logout</button>
-          {{else}}
-          <button class="no-button m-2" id="login">Login</button>
-          {{/if}}
-        </nav>
-      </header>
-      <main class="inline-flex">
-        <!-- Render the sub layout -->
+    
+  <nav class="relative px-4 py-4 flex justify-between items-center bg-gray-900 border-gray-200">
+		
+    <span
+            class="self-center text-xl font-semibold whitespace-nowrap text-white"
+          >codeIt   <i class="fas fa-terminal p-1"></i></span>
+		<div class="lg:hidden">
+			<button class="navbar-burger flex items-center text-blue-600 p-3">
+				<svg class="block h-4 w-4 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+					<title>Mobile menu</title>
+					<path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
+				</svg>
+			</button>
+		</div> 
+		<ul class="nav hidden absolute top-1/2 right-0 transform -translate-y-1/2 -translate-x-1/4 lg:flex lg:mx-auto lg:flex lg:w-auto lg:space-x-6 md:font-medium">
+			<li><button class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 text-gray-400 md:hover:text-white hover:bg-gray-700 hover:text-white md:hover:bg-transparent" id="home">Home</button></li>
+			<li><button class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 text-gray-400 md:hover:text-white hover:bg-gray-700 hover:text-white md:hover:bg-transparent" id="categories">Categories</button></li>
+            {{#if logged_in}}
+			<li><button class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 text-gray-400 md:hover:text-white hover:bg-gray-700 hover:text-white md:hover:bg-transparent" id="logout-burger">Logout</button></li>
+            {{else}}
+			<li><button class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 text-gray-400 md:hover:text-white hover:bg-gray-700 hover:text-white md:hover:bg-transparent" id="login">Login</button></li>
+            {{/if}}
+		</ul>
+	</nav>
+	<div class="navbar-menu relative z-50 hidden">
+		<div class="navbar-backdrop fixed inset-0 bg-gray-800 opacity-25"></div>
+		<nav class="fixed top-0 left-0 bottom-0 flex flex-col w-5/6 max-w-sm py-6 px-6 bg-white border-r overflow-y-auto">
+			<div class="flex items-center mb-8">
+       
+				<span
+            class="mr-auto text-xl font-semibold text-blue-600 leading-none"
+          >codeIt   <i class="fas fa-terminal p-1"></i></span>
+				<button class="navbar-close">
+					<svg class="h-6 w-6 text-gray-400 cursor-pointer hover:text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+					</svg>
+				</button>
+			</div>
+			<div>
+				<ul class="nav-burger">
+					<li class="mb-1">
+						<button class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" id="home">Home</button>
+					</li>
+					<li class="mb-1">
+						<button class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" id="categories">Categories</button>
+					</li>
+                    {{#if logged_in}}
+					<li class="mb-1">
+						<button class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" id="logout">Logout</button>
+					</li>
+                    {{else}}
+					<li class="mb-1">
+						<button class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" id="login">Login</button>
+					</li>
+                    {{/if}}
+				</ul>
+			</div>
+		</nav>
+	</div>
+
+      <main class="inline-flex w-full">
         {{{body}}}
       </main>
       <footer>
-        {{!-- Add footer??? --}}
       </footer>
     </div>
 
