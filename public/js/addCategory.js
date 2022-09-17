@@ -1,23 +1,26 @@
-const categoryForm = document.querySelector('.category-form');
+const categoryForm = document.querySelector(".category-form");
 
 const createCategory = (category) =>
-    fetch('/api/categories', {
-        method: 'POST',
-        body: JSON.stringify(category),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    });
+  fetch("/api/categories", {
+    method: "POST",
+    body: JSON.stringify(category),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 
 const addCategory = async (event) => {
-    event.preventDefault();
-    const categoryName = document.getElementById('new-category').value;
+  event.preventDefault();
 
-    const newCategory = {category_name: categoryName};
+  console.log("1----------------------------------------`");
 
-    createCategory(newCategory);
+  const categoryName = document.getElementById("new-category").value;
 
-    console.log(newCategory);
-}
+  const newCategory = { category_name: categoryName };
 
-categoryForm.addEventListener('submit', addCategory);
+  createCategory(newCategory);
+
+  console.log(newCategory);
+};
+
+categoryForm.addEventListener("submit", addCategory);
