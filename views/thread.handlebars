@@ -42,14 +42,14 @@
         {{#if thread.is_active}}
           {{#if subscribed}}
             <button
-              class="xl:w-1/4 md:w-1/2 sm:w-full bg-slate-500 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline btn btn-primary"
+              class="xl:w-1/4 md:w-1/2 sm:w-full py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               type="submit"
               subscribed="false"
               id="subscription"
             >UnSubscribe</button>
           {{else}}
             <button
-              class="xl:w-1/4 md:w-1/2 sm:w-full bg-slate-500 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline btn btn-primary"
+              class="xl:w-1/4 md:w-1/2 sm:w-full py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               type="submit"
               subscribed="true"
               id="subscription"
@@ -104,18 +104,18 @@
 
   {{#if logged_in}}
     {{#if thread.is_active}}
-      <form class="form post-form inline-flex w-full">
-        <div class="form-group w-11/12">
-          <input
-            class="form-input h-10 w-full border border-gray-200 shadow-md"
+      <form class="form post-form w-full">
+        <div class="form-group w-full">
+          <textarea
+            class="form-input h-20 w-full border border-gray-200 shadow-md"
             type="text"
             placeholder="Create new post..."
             id="new-post"
-          />
+          ></textarea>
         </div>
-        <div class="form-group w-1/12">
+        <div class="form-group w-full text-center">
           <button
-            class="w-full bg-slate-500 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline btn btn-primary"
+            class="mt-5 py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             type="submit"
           >Create</button>
         </div>
