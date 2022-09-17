@@ -3,14 +3,14 @@
 <!-- Loop over each object in the projects array -->
 <div class="row m-4 project w-full">
   {{#unless thread.is_active}}
-    <h5 class="font-medium leading-tight text-5xl mt-0 mb-2 text-blue-600 text-center">
+    <h5 class="font-mono font-medium leading-tight text-5xl mt-0 mb-2 text-blue-600 text-center">
       Thread Suspended
     </h5>{{/unless}}
   <div class="inline-flex w-full">
     <div>
   
   <div class="inline-flex w-full">
-    <p class="w-28 font-medium">
+    <p class="font-mono w-28 font-medium">
       Category:
     </p>
     <p class="pl-2">
@@ -19,37 +19,37 @@
     </p>
   </div>
   <div class="inline-flex w-full">
-    <p class="w-28 font-medium">
+    <p class="font-mono w-28 font-medium">
       Thread:
     </p>
-    <p class="pl-2" id="thread-id" thread="{{thread.id}}">
+    <p class="font-mono pl-2" id="thread-id" thread="{{thread.id}}">
       #{{thread.id}}
       {{thread.thread_name}}
     </p>
   </div>
   <div class="inline-flex w-full">
-    <p class="w-28 font-medium">
+    <p class="font-mono w-28 font-medium">
       Created by:
     </p>
-    <p class="pl-2">
+    <p class="font-mono pl-2">
       {{thread.user.name}}
     </p>
   </div>
   </div>
   <div class="w-full">
-    <p class="p-2 w-full grid justify-items-end">
+    <p class="font-mono p-2 w-full grid justify-items-end">
       {{#if logged_in}}
         {{#if thread.is_active}}
           {{#if subscribed}}
             <button
-              class="xl:w-1/4 md:w-1/2 sm:w-full py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              class="font-mono xl:w-1/4 md:w-1/2 sm:w-full py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               type="submit"
               subscribed="false"
               id="subscription"
-            >UnSubscribe</button>
+            >Unsubscribe</button>
           {{else}}
             <button
-              class="xl:w-1/4 md:w-1/2 sm:w-full py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              class="font-mono xl:w-1/4 md:w-1/2 sm:w-full py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               type="submit"
               subscribed="true"
               id="subscription"
@@ -58,18 +58,18 @@
         {{/if}}
       {{/if}}
     </p>
-    <p class="p-2 w-full grid justify-items-end">
+    <p class="font-mono p-2 w-full grid justify-items-end">
       {{#if isCreator}}
         {{#if thread.is_active}}
           <button
-            class="xl:w-1/4 md:w-1/2 sm:w-full bg-slate-500 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline btn btn-primary"
+            class="font-mono xl:w-1/4 md:w-1/2 sm:w-full bg-slate-500 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline btn btn-primary"
             type="submit"
             locked="false"
             id="locked"
           >Suspend Thread</button>
         {{else}}
           <button
-            class="xl:w-1/4 md:w-1/2 sm:w-full bg-slate-500 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline btn btn-primary"
+            class="font-mono xl:w-1/4 md:w-1/2 sm:w-full bg-slate-500 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline btn btn-primary"
             type="submit"
             locked="true"
             id="locked"
@@ -79,18 +79,18 @@
     </p>
   </div>
   </div>
-  <p class="pt-5 font-medium">
+  <p class="font-mono pt-10 text-xl font-bold">
     Posts:
   </p>
   {{#each thread.posts as |post|}}
     <div
       class="block my-5 p-6 w-full bg-white rounded-lg border border-gray-200 shadow-md"
     >
-      <h5 class="font-medium leading-tight text-xl mt-0 mb-2 text-blue-600">
+      <h5 class="font-mono font-medium leading-tight text-xl mt-0 mb-2 text-blue-600">
         {{post.post}}
       </h5>
       <div class="inline-flex pt-3 w-full bg-grey">
-        <p class="text-sm">
+        <p class="font-mono text-sm">
           Posted by:
           {{post.user.name}}
           on
@@ -107,7 +107,7 @@
       <form class="form post-form w-full">
         <div class="form-group w-full">
           <textarea
-            class="form-input h-20 w-full border border-gray-200 shadow-md"
+            class="p-6 font-mono form-input h-20 w-full border border-gray-200 shadow-md"
             type="text"
             placeholder="Create new post..."
             id="new-post"
@@ -115,7 +115,7 @@
         </div>
         <div class="form-group w-full text-center">
           <button
-            class="mt-5 py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            class="font-mono mt-5 py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             type="submit"
           >Create</button>
         </div>

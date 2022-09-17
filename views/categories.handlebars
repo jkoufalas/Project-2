@@ -1,7 +1,7 @@
 {{> sidebar}}
 
 <div class="category-span w-full">
-  <p class="justify-center text-center text-lg font-bold pt-5">
+  <p class="text-3xl justify-center text-center font-bold pt-5 font-mono">
     Categories
   </p>
   <div class="inline-flex w-full flex-wrap justify-center">
@@ -14,10 +14,10 @@
         class="p-6 m-4 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
       >
         <h5
-          class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+          class="font-mono mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
         >{{category.category_name}}</h5>
         <button
-          class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          class="font-mono inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           id="{{category.id}}"
         >
           Read more
@@ -39,7 +39,7 @@
   </div>
 
   {{#if logged_in}}
-    <div class="inline-flex w-full flex-wrap justify-center">
+    <div class="font-mono inline-flex w-full flex-wrap justify-center">
       <button
         class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         id="new-category"

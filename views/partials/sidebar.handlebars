@@ -1,12 +1,12 @@
 <div class="w-52 min-h-screen bg-gray-900 px-2 sm:px-4 p-2">
 
   <h2
-    class="font-bold block text-white"
+    class="font-bold block text-white font-mono pt-2"
     {{!-- class="font-bold block py-2 pr-4 pl-3 md:hover:bg-transparent md:border-0 md:p-0 text-white" --}}
   >Subscribed threads:</h2>
   {{#if logged_in}}
     <ul
-      class="nav bg-gray-900 text-sm"
+      class="nav bg-gray-900 text-sm font-mono"
       {{!-- class="nav p-4 mt-4 md:text-sm md:font-medium bg-gray-900 md:bg-gray-900 border-gray-700" --}}
     >
       {{#each subs.users_subscribed_threads as |threads|}}
@@ -25,7 +25,7 @@
     <ul
       class="nav flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium bg-gray-900 md:bg-gray-900 border-gray-700"
     >
-      <li class="block py-2 pr-4 pl-3 text-gray-700">
+      <li class="font-mono block py-2 text-gray-700">
         Please
         <a
           href="/login"
