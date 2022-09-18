@@ -165,6 +165,11 @@ router.get("/new-thread", async (req, res) => {
 router.get("/threads/:id", async (req, res) => {
   try {
     // Get all projects and JOIN with user data
+
+    console.log("----------------------------------------9999");
+
+    var nullThreads;
+
     const threadData = await Thread.findAll({
       include: [
         {
@@ -178,7 +183,19 @@ router.get("/threads/:id", async (req, res) => {
       ],
     });
 
+    if (threadData.length === 0) {
+      nullThreads = false;
+    } else {
+      nullThreads = true;
+    }
+    const categoryData = await Category.findByPk(req.params.id, {});
+
+    // Serialize data so the template can read it
+    var cat = categoryData.get({ plain: true });
+
     const threads = threadData.map((thread) => thread.get({ plain: true }));
+
+    console.log(threads);
 
     if (req.session.logged_in) {
       const subscriptionData = await User.findByPk(req.session.user_id, {
@@ -202,8 +219,10 @@ router.get("/threads/:id", async (req, res) => {
       threads,
       subs,
       logged_in: req.session.logged_in,
+      cat,
     });
   } catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 });
