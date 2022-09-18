@@ -1,3 +1,23 @@
 <!-- Loop over each object in the projects array -->
 {{> sidebar}}
 
+<div class="m-5 font-mono">
+    <p class="font-bold">
+        Last 10 posts:
+    </p>
+    {{#each posts as |post|}}
+        <div class="p-2">
+            <a href="/thread/{{post.thread.id}}">
+                <p class="text-sm">
+                    Thread: {{post.thread.thread_name}}
+                </p>
+                <p class="text-blue-700">
+                    {{post.post}}
+                </p>
+                <p class="text-xs text-gray-500">
+                    Posted by: {{post.user.name}} on {{format_date post.date_created}}
+                </p>
+            </a>
+        </div>
+    {{/each}}
+</div>

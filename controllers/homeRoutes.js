@@ -25,6 +25,15 @@ router.get("/", async (req, res) => {
         ],
       });
 
+      const postData = await Post.findAll({
+        include: [
+          { model: Thread }, { model: User }
+        ],
+        order: [['date_created', 'DESC']],
+        limit: 10,
+      });
+      var posts = postData.map((post) => post.get({ plain: true }));
+
       // Serialize data so the template can read it
       var subs = subscriptionData.get({ plain: true });
     } else {
@@ -35,6 +44,7 @@ router.get("/", async (req, res) => {
     res.render("homepage", {
       logged_in: req.session.logged_in,
       subs,
+      posts,
     });
   } catch (err) {
     res.status(500).json(err);
