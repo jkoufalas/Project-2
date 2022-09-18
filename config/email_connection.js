@@ -4,8 +4,8 @@ require("dotenv").config();
 let emailConnection = new nodemailer.createTransport({
   service: "Outlook365", //"gmail" is preconfigured by nodemailer, but you can setup any other email client supported by nodemailer
   auth: {
-    user: process.env.EMAIL_USER, //"username",
-    pass: process.env.EMAIL_PASSWORD, //"password",
+    user: "group4project2@hotmail.com", //"username",
+    pass: "Group!4Project!2", //"password",
   },
 
   /*  host: process.env.EMAIL_HOST, //smpt address
