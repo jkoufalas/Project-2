@@ -27,9 +27,17 @@ router.get("/", async (req, res) => {
 
       const postData = await Post.findAll({
         include: [
-          { model: Thread }, { model: User }
+          {
+            model: Thread,
+            include: [
+              {
+                model: Category,
+              },
+            ],
+          },
+          { model: User },
         ],
-        order: [['date_created', 'DESC']],
+        order: [["date_created", "DESC"]],
         limit: 10,
       });
       var posts = postData.map((post) => post.get({ plain: true }));

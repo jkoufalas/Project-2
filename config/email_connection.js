@@ -2,13 +2,22 @@ const nodemailer = require("nodemailer");
 require("dotenv").config();
 
 let emailConnection = new nodemailer.createTransport({
-  host: process.env.EMAIL_HOST, //smpt address
+  service: "Outlook365", //"gmail" is preconfigured by nodemailer, but you can setup any other email client supported by nodemailer
+  auth: {
+    user: "group4project2@hotmail.com", //"username",
+    pass: "Group!4Project!2", //"password",
+  },
+
+  /*  host: process.env.EMAIL_HOST, //smpt address
   port: process.env.EMAIL_PORT, // email port
   secure: process.env.EMAIL_SECURE, // SSL
   auth: {
     user: process.env.EMAIL_USER, //"username",
     pass: process.env.EMAIL_PASSWORD, //"password",
   },
+  tls: {
+    ciphers: "SSLv3",
+  }, */
 });
 
 module.exports = emailConnection;
