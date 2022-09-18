@@ -105,6 +105,8 @@ router.post("/deactivate/:id", withAuth, async (req, res) => {
 
       emailConnection.sendMail(message, function (error, info) {
         if (error) {
+          console.log(process.env.EMAIL_HOST);
+          console.log(error);
           console.log(
             `Error Occured sending Email for suspension of thread #${thread.id} to ${user.email}`
           );
