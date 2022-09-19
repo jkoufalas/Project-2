@@ -1,10 +1,8 @@
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
 
-// create our Location model
 class Group extends Model {}
 
-// create fields/columns for Location model
 Group.init(
   {
     id: {

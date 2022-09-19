@@ -33,6 +33,7 @@ User.init(
       allowNull: false,
       validate: {
         len: [8],
+        /* password must be over 8 char in length */
       },
     },
   },

@@ -1,6 +1,6 @@
 {{> sidebar}}
 
-<!-- Loop over each object in the projects array -->
+<!-- print data about thread -->
 <div class="row m-4 project w-full">
   {{#unless thread.is_active}}
     <h5 class="font-mono font-medium leading-tight text-5xl mt-0 mb-2 text-blue-600 text-center">
@@ -38,8 +38,11 @@
   </div>
   <div class="w-full">
     <p class="font-mono p-2 w-full grid justify-items-end">
+      <!-- only allow user to subscribe/unsub if logged in -->
       {{#if logged_in}}
+      <!-- if active then allow subscription changes -->
         {{#if thread.is_active}}
+          <!-- if subscribed then show unsub button -->
           {{#if subscribed}}
             <button
               class="font-mono xl:w-1/4 md:w-1/2 sm:w-full py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -48,6 +51,7 @@
               id="subscription"
             >Unsubscribe</button>
           {{else}}
+          <!-- if unsubscribed then show subscribe button -->
             <button
               class="font-mono xl:w-1/4 md:w-1/2 sm:w-full py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               type="submit"
@@ -59,7 +63,9 @@
       {{/if}}
     </p>
     <p class="font-mono p-2 w-full grid justify-items-end">
+      <!-- if the user is the creator of the thread -->
       {{#if isCreator}}
+        <!-- if the thread is active then show suspend thread -->
         {{#if thread.is_active}}
           <button
             class="font-mono xl:w-1/4 md:w-1/2 sm:w-full py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -67,6 +73,7 @@
             locked="false"
             id="locked"
           >Suspend Thread</button>
+        <!-- if the thread is suspended then show resume thread -->
         {{else}}
           <button
             class="font-mono xl:w-1/4 md:w-1/2 sm:w-full py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -82,6 +89,7 @@
   <p class="font-mono pt-10 text-xl font-bold">
     Posts:
   </p>
+  <!-- loop through all posts to print them to screen -->
   {{#each thread.posts as |post|}}
     <div
       class="block my-5 p-6 w-full bg-white rounded-lg border border-gray-200 shadow-md"
@@ -102,6 +110,7 @@
 
   {{/each}}
 
+  <!-- if the thread is active and user logged in allow user to post -->
   {{#if logged_in}}
     {{#if thread.is_active}}
       <form class="form post-form w-full">

@@ -1,19 +1,14 @@
+{{! This renders the subscribed threads }}
 <div class="w-52 min-h-screen bg-gray-900 px-2 sm:px-4 p-2">
 
-  <h2
-    class="font-bold block text-white font-mono pt-2"
-    {{!-- class="font-bold block py-2 pr-4 pl-3 md:hover:bg-transparent md:border-0 md:p-0 text-white" --}}
-  >Subscribed threads:</h2>
+  <h2 class="font-bold block text-white font-mono pt-2">Subscribed threads:</h2>
   {{#if logged_in}}
-    <ul
-      class="nav bg-gray-900 text-sm font-mono"
-      {{!-- class="nav p-4 mt-4 md:text-sm md:font-medium bg-gray-900 md:bg-gray-900 border-gray-700" --}}
-    >
+    {{! if logged in setup unordered list }}
+
+    <ul class="nav bg-gray-900 text-sm font-mono">
       {{#each subs.users_subscribed_threads as |threads|}}
-        <li
-          class="text-gray-400 hover:text-white pl-2 pt-2"
-          {{!-- class="py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-100 md:border-0 md:p-0 text-gray-400 hover:bg-gray-900 hover:text-white" --}}
-        >
+        {{! for each subscribed threads subscribe print it to list }}
+        <li class="text-gray-400 hover:text-white pl-2 pt-2">
           <a href="/thread/{{threads.id}}">
             {{threads.thread_name}}
           </a>
@@ -22,6 +17,7 @@
     </ul>
 
   {{else}}
+    {{! if not logged in let user know that the list is available when logged in }}
     <ul
       class="nav flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium bg-gray-900 md:bg-gray-900 border-gray-700"
     >

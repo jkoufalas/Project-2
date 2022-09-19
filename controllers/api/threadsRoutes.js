@@ -1,37 +1,12 @@
 const router = require("express").Router();
 const emailConnection = require("../../config/email_connection");
-const { Thread, User, Category, Post, Subscription } = require("../../models");
+const { Thread, User, Category, Subscription } = require("../../models");
 const withAuth = require("../../utils/auth");
 
-router.get("/:id", async (req, res) => {
-  try {
-    // Get all projects and JOIN with user data
-    const threadData = await Thread.findAll({
-      include: [
-        {
-          model: User,
-          attributes: { exclude: ["password"] },
-        },
-        {
-          model: Category,
-          where: { id: req.params.id },
-        },
-      ],
-    });
-
-    const threads = threadData.map((thread) => thread.get({ plain: true }));
-
-    res.render("threads", {
-      threads,
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
+//creating new thread with post to /api/threads
+//user must be logged in
 router.post("/", withAuth, async (req, res) => {
   try {
-    console.log("-11212--1212--------------------------");
     const newThread = await Thread.create({
       ...req.body,
       user_id: req.session.user_id,
@@ -46,8 +21,11 @@ router.post("/", withAuth, async (req, res) => {
   }
 });
 
+//resuming thread by posting to /api/threads/activate/id
+//user must be logged in
 router.post("/activate/:id", withAuth, async (req, res) => {
   try {
+    //updating isActive to true to resume thread
     const activateThread = await Thread.update(
       {
         is_active: true,
@@ -56,6 +34,7 @@ router.post("/activate/:id", withAuth, async (req, res) => {
         where: {
           id: req.params.id,
           user_id: req.session.user_id,
+          //query where user id is the creator
         },
       }
     );
@@ -66,8 +45,11 @@ router.post("/activate/:id", withAuth, async (req, res) => {
   }
 });
 
+//suspending thread by posting to /api/threads/activate/id
+//user must be logged in
 router.post("/deactivate/:id", withAuth, async (req, res) => {
   try {
+    //getting list of users subscribed to thread
     const usersSubscribed = await Thread.findByPk(req.params.id, {
       include: [
         {
@@ -81,8 +63,10 @@ router.post("/deactivate/:id", withAuth, async (req, res) => {
       ],
     });
 
+    //stripping to only required data
     var thread = usersSubscribed.get({ plain: true });
 
+    //updating isActive to false to suspend thread
     const deactivateThread = await Thread.update(
       {
         is_active: false,
@@ -95,6 +79,7 @@ router.post("/deactivate/:id", withAuth, async (req, res) => {
       }
     );
 
+    //iterate through all subscribed users
     thread.threads_subscription.map((user) => {
       let message = {
         from: process.env.EMAIL_USER,
@@ -103,10 +88,9 @@ router.post("/deactivate/:id", withAuth, async (req, res) => {
         text: `This thread has been suspended by its Creator ${thread.user.name}`,
       };
 
+      //send email notification to each user
       emailConnection.sendMail(message, function (error, info) {
         if (error) {
-          console.log(process.env.EMAIL_HOST);
-          console.log(error);
           console.log(
             `Error Occured sending Email for suspension of thread #${thread.id} to ${user.email}`
           );

@@ -1,49 +1,48 @@
+//import modular rout
 const router = require("express").Router();
-const {
-  Category,
-  Thread,
-  Post,
-  User,
-  Group,
-  GroupMembership,
-  Message,
-  Subscription,
-} = require("../models");
-const withAuth = require("../utils/auth");
+//import modals
+const { Category, Thread, Post, User, Subscription } = require("../models");
 
+const getSubscribedThreads = async (id) => {
+  //setup subscribed threads list for partial
+  const subscriptionData = await User.findByPk(id, {
+    attributes: { exclude: ["password"] },
+    include: [
+      {
+        model: Thread,
+        through: Subscription,
+        as: "users_subscribed_threads",
+      },
+    ],
+  });
+
+  return subscriptionData.get({ plain: true });
+};
+
+//search in root route
 router.get("/", async (req, res) => {
   try {
+    //get 10 posts to put on home screen
+    //these posts ordered to become the most recent posts
+    const postData = await Post.findAll({
+      include: [
+        {
+          model: Thread,
+          include: [
+            {
+              model: Category,
+            },
+          ],
+        },
+        { model: User },
+      ],
+      order: [["date_created", "DESC"]],
+      limit: 10,
+    });
+    var posts = postData.map((post) => post.get({ plain: true }));
     if (req.session.logged_in) {
-      const subscriptionData = await User.findByPk(req.session.user_id, {
-        attributes: { exclude: ["password"] },
-        include: [
-          {
-            model: Thread,
-            through: Subscription,
-            as: "users_subscribed_threads",
-          },
-        ],
-      });
-
-      const postData = await Post.findAll({
-        include: [
-          {
-            model: Thread,
-            include: [
-              {
-                model: Category,
-              },
-            ],
-          },
-          { model: User },
-        ],
-        order: [["date_created", "DESC"]],
-        limit: 10,
-      });
-      var posts = postData.map((post) => post.get({ plain: true }));
-
-      // Serialize data so the template can read it
-      var subs = subscriptionData.get({ plain: true });
+      //get subscription data for partial
+      var subs = await getSubscribedThreads(req.session.user_id);
     } else {
       var subs = null;
     }
@@ -59,9 +58,10 @@ router.get("/", async (req, res) => {
   }
 });
 
+//when the categories page is requested
 router.get("/categories", async (req, res) => {
   try {
-    // Get all projects and JOIN with user data
+    // Get all categories and JOIN with user data
     const categoryData = await Category.findAll({
       include: [
         {
@@ -71,24 +71,15 @@ router.get("/categories", async (req, res) => {
       ],
     });
 
+    //strip data so that only results remain
     const categories = categoryData.map((categorie) =>
       categorie.get({ plain: true })
     );
 
+    //setup subscribed threads list for partial
     if (req.session.logged_in) {
-      const subscriptionData = await User.findByPk(req.session.user_id, {
-        attributes: { exclude: ["password"] },
-        include: [
-          {
-            model: Thread,
-            through: Subscription,
-            as: "users_subscribed_threads",
-          },
-        ],
-      });
-
-      // Serialize data so the template can read it
-      var subs = subscriptionData.get({ plain: true });
+      //get subscription data for partial
+      var subs = await getSubscribedThreads(req.session.user_id);
     } else {
       var subs = null;
     }
@@ -104,26 +95,18 @@ router.get("/categories", async (req, res) => {
   }
 });
 
+//when the new category page is requested
 router.get("/new-category", async (req, res) => {
   try {
+    //setup subscribed threads list for partial
     if (req.session.logged_in) {
-      const subscriptionData = await User.findByPk(req.session.user_id, {
-        attributes: { exclude: ["password"] },
-        include: [
-          {
-            model: Thread,
-            through: Subscription,
-            as: "users_subscribed_threads",
-          },
-        ],
-      });
-
-      // Serialize data so the template can read it
-      var subs = subscriptionData.get({ plain: true });
+      //get subscription data for partial
+      var subs = await getSubscribedThreads(req.session.user_id);
     } else {
       var subs = null;
     }
 
+    // Pass serialized data and session flag into template
     res.render("new-category", {
       logged_in: req.session.logged_in,
       subs,
@@ -133,38 +116,10 @@ router.get("/new-category", async (req, res) => {
   }
 });
 
-router.get("/new-thread", async (req, res) => {
-  try {
-    if (req.session.logged_in) {
-      const subscriptionData = await User.findByPk(req.session.user_id, {
-        attributes: { exclude: ["password"] },
-        include: [
-          {
-            model: Thread,
-            through: Subscription,
-            as: "users_subscribed_threads",
-          },
-        ],
-      });
-
-      // Serialize data so the template can read it
-      var subs = subscriptionData.get({ plain: true });
-    } else {
-      var subs = null;
-    }
-
-    res.render("new-thread", {
-      logged_in: req.session.logged_in,
-      subs,
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
+//when an individual thread page is requested
 router.get("/threads/:id", async (req, res) => {
   try {
-    // Get all projects and JOIN with user data
+    // Get all threads and JOIN with user and category data
     const threadData = await Thread.findAll({
       include: [
         {
@@ -178,30 +133,26 @@ router.get("/threads/:id", async (req, res) => {
       ],
     });
 
+    const categoryData = await Category.findByPk(req.params.id, {});
+
+    // Serialize data so the template can read it
+    var cat = categoryData.get({ plain: true });
+
     const threads = threadData.map((thread) => thread.get({ plain: true }));
 
+    //setup subscribed threads list for partial
     if (req.session.logged_in) {
-      const subscriptionData = await User.findByPk(req.session.user_id, {
-        attributes: { exclude: ["password"] },
-        include: [
-          {
-            model: Thread,
-            through: Subscription,
-            as: "users_subscribed_threads",
-          },
-        ],
-      });
-
-      // Serialize data so the template can read it
-      var subs = subscriptionData.get({ plain: true });
+      //get subscription data for partial
+      var subs = await getSubscribedThreads(req.session.user_id);
     } else {
       var subs = null;
     }
-
+    // Pass serialized data and session flag into template
     res.render("threads", {
       threads,
       subs,
       logged_in: req.session.logged_in,
+      cat,
     });
   } catch (err) {
     res.status(500).json(err);
@@ -235,25 +186,16 @@ router.get("/thread/:id", async (req, res) => {
 
     const thread = threadData.get({ plain: true });
 
+    //setup subscribed threads list for partial
     if (req.session.logged_in) {
-      const subscriptionData = await User.findByPk(req.session.user_id, {
-        attributes: { exclude: ["password"] },
-        include: [
-          {
-            model: Thread,
-            through: Subscription,
-            as: "users_subscribed_threads",
-          },
-        ],
-      });
-
-      // Serialize data so the template can read it
-      var subs = subscriptionData.get({ plain: true });
+      //get subscription data for partial
+      var subs = await getSubscribedThreads(req.session.user_id);
 
       var subscribed;
       var isCreator;
       //variables for subscription and freezing post
 
+      //determining if anyone is subscribed to the thread
       var count = await Subscription.count({
         where: {
           thread_id: req.params.id,
@@ -261,12 +203,14 @@ router.get("/thread/:id", async (req, res) => {
         },
       });
 
+      //turning the count into a boolean for use in handlebars
       if (count) {
         subscribed = true;
       } else {
         subscribed = false;
       }
 
+      //determining if the current user in the creator of the thread for the suspension ability for use in handlebars
       var countCreator = await Thread.count({
         where: {
           id: req.params.id,
@@ -274,6 +218,7 @@ router.get("/thread/:id", async (req, res) => {
         },
       });
 
+      //changes the count to boolean for use in handlebars if
       if (countCreator) {
         isCreator = true;
       } else {
@@ -286,6 +231,7 @@ router.get("/thread/:id", async (req, res) => {
       var isCreator = false;
     }
 
+    // Pass serialized data and session flag into template
     res.render("thread", {
       thread,
       subs,
@@ -306,7 +252,7 @@ router.get("/login", (req, res) => {
     return;
   }
   var subs = null;
-
+  // Pass serialized data and session flag into template
   res.render("login", {
     subs,
   });
