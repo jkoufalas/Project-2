@@ -38,7 +38,7 @@ The dependancies are listed within the package.json file. The dependancies for t
 - express-handlebars
 - nodemailer
 
-Since the dependancies are listed within the lock file, they will autmatically installed with the following command
+Since the dependancies are listed within the lock file, they will autmatically be installed with the following command
 
 ```
 npm i
