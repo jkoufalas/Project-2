@@ -2,63 +2,114 @@
 
 ## Description
 
-Our Group decided to put together for Project Week a Social Media Application similar to reddit/twitter but more focused towards coding.
-We dubbed it codeIt. We built this Application so we could apply our skills and knowledge to make an application that was of use to the Coding Community in some way.
+We have designed a social platform for individuals, who like us, have an interest in software development.
 
-## Table of Contents (Optional)
+We wanted to create a place where they can go to discuss ideas and issues, with the ability to network by browsing and creating categories, subscribing to threads of interest, and posting within threads.
 
-- [Installation](#installation)
-- [Usage](#usage)
-- [Credits](#credits)
-- [License](#license)
+<br>
 
-## Installation
+## Table of Contents
 
-1: After cloning the repository, install the required npm packages via your terminal using npm i or npm install.
-2: Next login to mysql and run the schema to create the database.
-3: After returning to your terminal run npm run seed to seed the database.
-4: finally run npm start to start the application on your localhost.
-
-## Usage
-
-Provide instructions and examples for use. Include screenshots as needed.
-
-To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative filepath, add it to your README using the following syntax:
-
-    ```md
-    ![alt text](assets/images/screenshot.png)
-    ```
-
-## Credits
-
-List your collaborators, if any, with links to their GitHub profiles.
-
-If you used any third-party assets that require attribution, list the creators with links to their primary web presence in this section.
-
-If you followed tutorials, include links to those here as well.
-
-## License
-
-The last section of a high-quality README file is the license. This lets other developers know what they can and cannot do with your project. If you need help choosing a license, refer to [https://choosealicense.com/](https://choosealicense.com/).
+- [GitHub Link](#link)
+- [Installation Instructions](#install-instructions)
+- [Executing Instructions](#executing-instructions)
+- [Database Information](#database-information)
+- [Nodemailer](#nodemailer)
+- [Screen Shots](#screen-shots)
 
 ---
 
-🏆 The previous sections are the bare minimum, and your project will ultimately determine the content of this document. You might also want to consider adding the following sections.
+## Link
 
-## Badges
+The link to the GitHub repository of the project is <br>
+[https://github.com/jkoufalas/codeIt](https://github.com/jkoufalas/codeIt)
 
-![badmath](https://img.shields.io/github/languages/top/lernantino/badmath)
+---
 
-Badges aren't necessary, per se, but they demonstrate street cred. Badges let other developers know that you know what you're doing. Check out the badges hosted by [shields.io](https://shields.io/). You may not understand what they all represent now, but you will in time.
+## Install Instructions
 
-## Features
+The dependancies are listed within the package.json file. The dependancies for this application are
 
-If your project has a lot of features, list them here.
+- sequelize
+- dotenv
+- mysql2
+- expressjs
+- handlebars
+- express-handlebars
+- nodemailer
 
-## How to Contribute
+Since the dependancies are listed within the lock file, they will autmatically installed with the following command
 
-If you created an application or package and would like other developers to contribute it, you can include guidelines for how to do so. The [Contributor Covenant](https://www.contributor-covenant.org/) is an industry standard, but you can always write your own if you'd prefer.
+```
+npm i
+```
 
-## Tests
+---
 
-Go the extra mile and write tests for your application. Then provide examples on how to run them here.
+## Executing Instructions
+
+```
+node server.js
+```
+
+Utilize the command prompts and the application will prompt you for any information it needs to fullfill the requests you have made.
+
+---
+
+## Database Information
+
+The user must have a MySQL database installed on the machine they are running the application on.
+
+The schema for the database is included in the db folder and can be included by running the command
+
+```
+mysql> source db/schema.sql
+```
+
+The seed data if required can be inserted into the database by using the index.js file in the seeds folder and inserted by running the command.
+
+```
+> node seeds/seed.js
+```
+
+The information used to connect to the database is currently implemented with the dotenv package. To include the correct information to connect to the database corretly the following the user needs to create a .env file and add the following data.
+
+```
+    DB_NAME="social_media_db"
+    DB_PW="your_password"
+    DB_USER="your_user"
+    EMAIL_USER='email_address'
+    EMAIL_PASSWORD='emails password'
+```
+
+If the user doesn't want to use the dotenv package, then they can simply replace these variable in the server.js file with the hard coded values that these variables are storing.
+
+---
+
+## Nodemailer
+
+Currently nodemailer is implemented using Outlook365, this can be changed to use and service or manual SMTP. Outlook365 was used because it provided a free account that nodemailer could use as a service with details in heroku that would not matter.
+
+## Screen Shots
+
+### Home Screen
+
+![Home Screen](./assets/images/homescreen.png)
+
+### Categories Screen
+
+![Categories Screen](./assets/images/categoriesScreen.png)
+
+### Threads Screen
+
+![Threads Screen](./assets/images/threadsScreen.png)
+
+### Thread Screen
+
+![Thread Screen](./assets/images/threadScreen.png)
+
+### Login/SignUp Screen
+
+![Login Screen](./assets/images/loginScreen.png)
+
+---

@@ -12,7 +12,6 @@ router.post("/", withAuth, async (req, res) => {
       ...req.body,
       user_id: req.session.user_id,
     });
-    //redirect to categories once
     res.redirect("/categories");
     return;
   } catch (err) {
