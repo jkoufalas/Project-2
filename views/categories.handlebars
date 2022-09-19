@@ -1,14 +1,14 @@
 {{> sidebar}}
 
+{{! print list of categories }}
+
 <div class="category-span w-full">
   <p class="text-3xl justify-center text-center font-bold pt-5 font-mono">
     Categories
   </p>
   <div class="inline-flex w-full flex-wrap justify-center">
+    {{! cycle through each category and print card for each }}
     {{#each categories as |category|}}
-      {{!-- <button class="w-full p-3 m-3 text-center font-medium bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100" id="{{category.id}}">
-        {{category.category_name}}
-    </button> --}}
 
       <div
         class="p-6 m-4 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
@@ -16,6 +16,7 @@
         <h5
           class="font-mono mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
         >{{category.category_name}}</h5>
+        {{! setup button to link to thread }}
         <button
           class="font-mono inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           id="{{category.id}}"
@@ -38,6 +39,7 @@
     {{/each}}
   </div>
 
+{{! if logged in allow user to create thread by going to new category page }}
   {{#if logged_in}}
     <div class="font-mono inline-flex w-full flex-wrap justify-center">
       <button

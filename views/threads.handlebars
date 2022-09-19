@@ -1,7 +1,7 @@
 {{> sidebar}}
 
 
-<!-- Loop over each object in the projects array -->
+<!-- setup page with category data -->
 <div class="row m-4 project w-full">
   <div class="threads-span">
     <div class="justify-center inline-flex w-full">
@@ -10,6 +10,7 @@
       </p>
     </div>
     <div class="inline-flex w-full flex-wrap justify-center">
+      <!-- loop through all threads to create card for each -->
       {{#each threads as |thread|}}
         <div
         class="p-6 m-4 max-w-sm rounded-lg border border-gray-200 shadow-md bg-gray-800"
@@ -43,6 +44,7 @@
     </div>
   </div>
 
+<!-- if logged in allow user to create thread by displaying form and load javascript -->
 {{#if logged_in}}
 <div class="row m-4 project w-full">
 
@@ -62,7 +64,9 @@
           >Create</button>
         </div>
       </form>
+      <script src="../js/addThread.js"></script>
   {{/if}}
 </div>
 
 <script src="../js/threads.js"></script>
+

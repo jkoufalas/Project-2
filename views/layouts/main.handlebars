@@ -15,11 +15,13 @@
 
   <body>
     
+	{{!-- Nav area --}}
   <nav class="relative px-4 py-4 flex justify-between items-center bg-gray-900 border-gray-200">
 		
-    <span
+    <button
             class="self-center text-3xl font-semibold whitespace-nowrap text-white font-mono tracking-widest"
-          >codeIt   <i class="fas fa-terminal p-1"></i></span>
+			id="homeButton"
+          >codeIt   <i class="fas fa-terminal p-1"></i></button>
 		<div class="lg:hidden">
 			<button class="navbar-burger flex items-center text-blue-600 p-3">
 				<svg class="block h-4 w-4 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -38,14 +40,15 @@
             {{/if}}
 		</ul>
 	</nav>
+	{{!-- Burger Nav area --}}
 	<div class="navbar-menu relative z-50 hidden">
 		<div class="navbar-backdrop fixed inset-0 bg-gray-800 opacity-25"></div>
 		<nav class="fixed top-0 left-0 bottom-0 flex flex-col w-5/6 max-w-sm py-6 px-6 bg-white border-r overflow-y-auto">
 			<div class="flex items-center mb-8">
        
-				<span
-            class="mr-auto text-xl font-semibold text-blue-600 leading-none"
-          >codeIt   <i class="fas fa-terminal p-1"></i></span>
+				<button
+            class="mr-auto text-xl font-semibold text-blue-600 leading-none" id="logo"
+          >codeIt   <i class="fas fa-terminal p-1"></i></button>
 				<button class="navbar-close">
 					<svg class="h-6 w-6 text-gray-400 cursor-pointer hover:text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>

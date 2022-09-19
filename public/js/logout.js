@@ -13,5 +13,6 @@ const logout = async () => {
   }
 };
 
+//if normal nav button used or burger button logout
 document.querySelector("#logout").addEventListener("click", logout);
 document.querySelector("#logout-burger").addEventListener("click", logout);

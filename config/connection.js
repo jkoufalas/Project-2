@@ -1,10 +1,13 @@
+//import packages
 const Sequelize = require("sequelize");
 require("dotenv").config();
 
 let sequelize;
 
+//if using jawsdb on heroku
 if (process.env.JAWSDB_URL) {
   sequelize = new Sequelize(process.env.JAWSDB_URL);
+  //otherwise local instance and therefore use dotenv
 } else {
   sequelize = new Sequelize(
     process.env.DB_NAME,

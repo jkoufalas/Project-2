@@ -6,7 +6,6 @@ const routes = require("./controllers");
 const helpers = require("./utils/helpers");
 
 const sequelize = require("./config/connection");
-//const emailConnection = require("./config/email_connection");
 
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
 
@@ -41,12 +40,3 @@ app.use(routes);
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log("Now listening"));
 });
-
-// verify connection configuration
-/* emailConnection.verify(function (error, success) {
-  if (error) {
-    console.log(error);
-  } else {
-    console.log("Server is ready to take our messages");
-  }
-}); */
