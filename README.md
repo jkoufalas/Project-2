@@ -90,7 +90,7 @@ If the user doesn't want to use the dotenv package, then they can simply replace
 
 Currently nodemailer is implemented using Outlook365, this can be changed to use and service or manual SMTP. Outlook365 was used because it provided a free account that nodemailer could use as a service with details in heroku that would not matter.
 
-## Screen Shots
+## Screenshots
 
 ### Home Screen
 
