@@ -2,11 +2,11 @@
 
 <!-- Loop array of 10 posts and print them to the screen -->
 <div class="m-5 font-mono">
-    <p class="font-bold">
+    <p class="font-bold pb-2">
         Last 10 posts:
     </p>
     {{#each posts as |post|}}
-        <div class="p-2">
+        <div class="p-2 border-t-2">
             <p class="text-sm">
               Category: <a class="font-bold" href="/threads/{{post.thread.category.id}}">{{post.thread.category.category_name}}</a> Thread: <a class="font-bold" href="/thread/{{post.thread.id}}">{{post.thread.thread_name}}</a>
             </p>

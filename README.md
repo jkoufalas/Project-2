@@ -38,7 +38,7 @@ The dependancies are listed within the package.json file. The dependancies for t
 - express-handlebars
 - nodemailer
 
-Since the dependancies are listed within the lock file, they will autmatically installed with the following command
+Since the dependancies are listed within the lock file, they will autmatically be installed with the following command
 
 ```
 npm i
@@ -90,7 +90,7 @@ If the user doesn't want to use the dotenv package, then they can simply replace
 
 Currently nodemailer is implemented using Outlook365, this can be changed to use and service or manual SMTP. Outlook365 was used because it provided a free account that nodemailer could use as a service with details in heroku that would not matter.
 
-## Screen Shots
+## Screenshots
 
 ### Home Screen
 
